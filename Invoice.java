@@ -25,8 +25,8 @@ public class Invoice{
     public String getDate(){
         return "";
     }
-    public String getTotalPrice(){
-        return "";
+    public int getTotalPrice(){
+        return 0;
     }
     public void setId(int id){
     }
