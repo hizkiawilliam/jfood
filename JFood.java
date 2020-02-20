@@ -10,6 +10,7 @@ public class JFood{
     /**
      * Constructor for objects of class JFood
      */
-    public void main(String[] args){
+    public void main(String[] args)
+    {
     }
 }
