@@ -3,7 +3,7 @@
  * Write a description of class DatabaseFood here.
  *
  * @author Hizkia William Eben
- * @version 28-02-2020
+ * @version 05.03.2020
  */
 public class DatabaseSeller
 {
@@ -39,7 +39,7 @@ public class DatabaseSeller
     * Method to show seller
     * @return null
     */
-    public Food getSeller()
+    public Seller getSeller()
     {
         return null;
     }

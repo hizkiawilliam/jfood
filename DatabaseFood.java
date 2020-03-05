@@ -3,11 +3,15 @@
  * Write a description of class DatabaseFood here.
  *
  * @author Hizkia William Eben
- * @version 27-02-2020
+ * @version 05.03.2020
  */
+
+import java.util.ArrayList;
+
 public class DatabaseFood
 {
     // instance variables - replace the example below with your own
+    // private ArrayList<Food> listFood = new ArrayList<>();
     private String[] listFood;
     private int data = 0;
     

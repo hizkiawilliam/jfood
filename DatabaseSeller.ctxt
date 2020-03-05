@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=DatabaseSeller
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ DatabaseFood\ here.\r\n\r\n\ @author\ Hizkia\ William\ Eben\r\n\ @version\ 28-02-2020\r\n
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ DatabaseFood\ here.\r\n\r\n\ @author\ Hizkia\ William\ Eben\r\n\ @version\ 05.03.2020\r\n
 comment1.params=
 comment1.target=DatabaseSeller()
 comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ DatabaseFood\r\n
@@ -11,7 +11,7 @@ comment3.params=seller
 comment3.target=boolean\ removeSeller(Seller)
 comment3.text=\r\n\ Method\ to\ remove\ seller\r\n\ @return\ false\ default\ return\ param\ for\ boolean\r\n
 comment4.params=
-comment4.target=Food\ getSeller()
+comment4.target=Seller\ getSeller()
 comment4.text=\r\n\ Method\ to\ show\ seller\r\n\ @return\ null\r\n
 comment5.params=
 comment5.target=java.lang.String[]\ getListSeller()

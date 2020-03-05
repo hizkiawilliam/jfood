@@ -2,7 +2,7 @@
  * Write a description of class Invoice here.
  *
  * @author Hizkia William Eben
- * @version 27.02.2020
+ * @version 05.03.2020
  */
 public class Invoice
 {
