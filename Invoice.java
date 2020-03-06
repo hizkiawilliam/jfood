@@ -11,6 +11,8 @@ public class Invoice
     private String date;
     private int totalPrice;
     private Customer customer;
+    private PaymentType paymentType;
+    private InvoiceStatus status;
 
     /**
      * Constructor for objects of class Customer
@@ -20,13 +22,14 @@ public class Invoice
      * @param customer variable to store information about customer
      * @param totalPrice variable to store information about total price
      */
-    public Invoice(int id, int idFood, String date, Customer customer, int totalPrice)
+    public Invoice(int id, int idFood, String date, Customer customer, int totalPrice, InvoiceStatus status)
     {
         this.id = id;
         this.idFood = idFood;
         this.date = date;
         this.customer = customer;
         this.totalPrice = totalPrice;
+        this.status = status;
     }
     
     /**
@@ -75,6 +78,24 @@ public class Invoice
     }
     
     /**
+     * Method as accessor to get payment type information in the invoice
+     * @return paymentType object that stores payment type information of the invoice
+     */
+    public PaymentType getPaymentType()
+    {
+        return paymentType;
+    }
+    
+    /**
+     * Method as accessor to get invoice status of the invoice
+     * @return totalPrice variable that stores invoice status of the invoice
+     */
+    public InvoiceStatus getInvoiceStatus()
+    {
+        return status;
+    }
+    
+    /**
     * Method as setter or mutator to set id of the invoice
     */
     public void setId(int id)
@@ -115,10 +136,32 @@ public class Invoice
     }
     
     /**
+    * Method as setter or mutator to set payment type of the invoice
+    */
+    public void setPaymentType(PaymentType paymentType)
+    {
+        this.paymentType = paymentType;
+    }
+    
+    /**
+    * Method as setter or mutator to set invoice status of the invoice
+    */
+    public void setInvoiceStatus(InvoiceStatus status)
+    {
+        this.status = status;
+    }
+    
+    /**
     * Method to print data of the invoice
     */
     public void printData()
     {
-        System.out.println(totalPrice);
+        System.out.println("===============Invoice===============");
+        System.out.println("ID: " + getId());
+        System.out.println("ID food: " + getIdFood());        
+        System.out.println("Date: " + getDate());
+        System.out.println("Customer: " + customer.getName());  
+        System.out.println("Total Price: " + getTotalPrice());
+        System.out.println("Status: " + getInvoiceStatus().toString());        
     }
 }

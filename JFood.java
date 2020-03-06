@@ -20,12 +20,13 @@ public class JFood
         Food food1 = new Food(1001,"White Coffee",seller1,25000,FoodCategory.Coffee);
         Food food2 = new Food(1002,"Ayam Bakar Kecap",seller1,17000,FoodCategory.Beverages);
         Customer customer1 = new Customer(42825,"Darrell Yonathan","darrell.yonathan@ui.ac.id","pemrograman","27-02-2020");
-        Invoice invoice1 = new Invoice(0001,1001,"27-02-2020",customer1,17000);
+        
+        Invoice invoice1 = new Invoice(0001,food1.getId(),"27-02-2020",customer1,food1.getPrice(),InvoiceStatus.Finished);
         //System.out.println(seller1.getName());
         //seller1.setName("Ramadhan");
         //System.out.println(seller1.getName());
-        
-        food2.printData();
+        //food2.printData();
+        invoice1.printData();
         //DatabaseFood listfood1 = new DatabaseFood();
         //listfood1.addFood(food1);
         //listfood1.addFood(food2);
