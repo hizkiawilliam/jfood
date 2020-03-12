@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=FoodCategory
-comment0.text=\r\n\ Enumeration\ class\ FoodCategory\ -\ write\ a\ description\ of\ the\ enum\ class\ here\r\n\r\n\ @author\ (Hizkia\ William\ Eben\r\n\ @version\ 05-03-20\r\n
+comment0.text=\r\n\ Enumeration\ class\ FoodCategory\ -\ write\ a\ description\ of\ the\ enum\ class\ here\r\n\r\n\ @author\ Hizkia\ William\ Eben\r\n\ @version\ 12.03.2020\r\n
 comment1.params=toString
 comment1.target=FoodCategory(java.lang.String)
 comment2.params=

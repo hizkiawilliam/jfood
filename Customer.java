@@ -2,7 +2,7 @@
  * Write a description of class Customer here.
  *
  * @author Hizkia William Eben
- * @version 05.03.2020
+ * @version 12.03.2020
  */
 public class Customer
 {

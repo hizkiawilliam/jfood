@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Seller
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ Seller\ here.\r\n\r\n\ @author\ Hizkia\ William\ Eben\r\n\ @version\ 05.03.2020\r\n
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ Seller\ here.\r\n\r\n\ @author\ Hizkia\ William\ Eben\r\n\ @version\ 12.03.2020\r\n
 comment1.params=id\ name\ email\ phoneNumber\ location
 comment1.target=Seller(int,\ java.lang.String,\ java.lang.String,\ java.lang.String,\ Location)
 comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ Customer\r\n\ @param\ id\ variable\ for\ identifying\ seller\r\n\ @param\ name\ variable\ to\ store\ name\ of\ seller\r\n\ @param\ email\ variable\ to\ store\ email\ information\ about\ seller's\ email\r\n\ @param\ phoneNumber\ variable\ to\ store\ information\ about\ phone\ number\ of\ seller\r\n\ @param\ location\ variable\ to\ store\ information\ about\ location\ as\ object\r\n

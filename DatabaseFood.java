@@ -3,7 +3,7 @@
  * Write a description of class DatabaseFood here.
  *
  * @author Hizkia William Eben
- * @version 05.03.2020
+ * @version 12.03.2020
  */
 
 import java.util.ArrayList;
