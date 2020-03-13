@@ -1,4 +1,3 @@
-
 /**
  * Write a description of class JFood here.
  *
@@ -26,14 +25,20 @@ public class JFood
         CashlessInvoice invoice1 = new CashlessInvoice(1, food1, "12,03,2020",customer1,InvoiceStatus.Ongoing);
         CashlessInvoice invoice2 = new CashlessInvoice(2, food2, "12,03,2020",customer2,InvoiceStatus.Finished,promo1);
         CashlessInvoice invoice3 = new CashlessInvoice(3, food3, "12,03,2020",customer2,InvoiceStatus.Finished,promo1);
+        CashInvoice invoice4 = new CashInvoice(4, food1, "13,03,2020",customer2,InvoiceStatus.Ongoing);
+        CashInvoice invoice5 = new CashInvoice(5, food2, "13,03,2020",customer2,InvoiceStatus.Finished,7000);        
         
-        invoice1.setTotalPrice();
-        invoice2.setTotalPrice();
-        invoice3.setTotalPrice();
+        //invoice1.setTotalPrice();
+        //invoice2.setTotalPrice();
+        //invoice3.setTotalPrice();
+        invoice4.setTotalPrice();
+        invoice5.setTotalPrice();        
         
-        invoice1.printData();
-        invoice2.printData();
-        invoice3.printData();
+        //invoice1.printData();
+        //invoice2.printData();
+        //invoice3.printData();
+        invoice4.printData();
+        invoice5.printData();        
         //Invoice invoice1 = new Invoice(0001,food1.getId(),"27-02-2020",customer1,food1.getPrice(),InvoiceStatus.Finished);
         //System.out.println(seller1.getName());
         //seller1.setName("Ramadhan");
