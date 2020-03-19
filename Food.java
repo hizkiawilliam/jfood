@@ -64,14 +64,12 @@ public class Food
     {
         this.seller = seller;
     }
-    public void printData()
+    
+    /**
+    * Method to set all variables Food to String
+    */    
+    public String toString()
     {
-        System.out.println("===============FOOD===============");
-        System.out.println("ID: " + getId());
-        System.out.println("Name: " + getName());
-        System.out.println("Seller: " + getSeller().getName());        
-        System.out.println("City: " + seller.getLocation().getCity());  
-        System.out.println("Price: " + getPrice());        
-        System.out.println("Category: " + getCategory());         
+         return "Id = " + getId() + "Name = " + getName() + "Seller = " + getSeller().getName() + "City =" + seller.getLocation().getCity() + "Price = " + getPrice() + "Category = " + getCategory().toString();
     }
 }

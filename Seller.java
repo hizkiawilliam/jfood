@@ -117,10 +117,10 @@ public class Seller
     }
     
     /**
-    * Method as to print data, specificaly for seller name
-    */
-    public void printData()
+    * Method to set all variables Seller to String
+    */    
+    public String toString()
     {
-        System.out.println(name);
+         return "Id = " + getId() + "Name = " + getName() + "Phone Number = " + getPhoneNumber() + "Location =" + getLocation().getCity();
     }
 }

@@ -75,10 +75,10 @@ public class Location
     }
     
     /**
-    * Method to print data
-    */
-    public void printData()
+    * Method to set all variables Location to String
+    */    
+    public String toString()
     {
-        System.out.println(province);
+         return "Province = " + getProvince() + "City = " + getCity() + "Description = " + getDescription();
     }
 }

@@ -72,13 +72,11 @@ public class Promo
     {
         this.active = active;
     }
-    public void printDate()
+    /**
+    * Method to set all variables Promo to String
+    */    
+    public String toString()
     {
-        System.out.println("===============Promo===============");
-        System.out.println("ID: " + getId());
-        System.out.println("Name: " + getCode());
-        System.out.println("Discount: " + getDiscount());        
-        System.out.println("Minimum Price: " + getMinPrice());          
-        System.out.println("Active: " + getActive()); 
+         return "Id = " + getId() + "Code = " + getCode() + "Discount = " + getDiscount() + "Min Price " + getDiscount() + "Active Status" + getActive();
     }
 }

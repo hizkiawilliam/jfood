@@ -2,15 +2,21 @@
  * Write a description of class Customer here.
  *
  * @author Hizkia William Eben
- * @version 12.03.2020
+ * @version 19.03.2020
  */
+
+import java.util.*;
+import java.util.regex.*;
+import java.text.*;
+
 public class Customer
 {
     private int id;
     private String name;
     private String email;
     private String password;
-    private String joinDate;
+    private Calendar joinDate;
+    private String print;
    
 
     /**
@@ -21,13 +27,30 @@ public class Customer
      * @param password variable to store password
      * @param joinDate variable to store join date of customer
      */
-    public Customer(int id, String name, String email, String password, String joinDate)
+    public Customer(int id, String name, String email, String password, Calendar joinDate)
     {
         this.id = id;
         this.name = name;
-        this.email = email;
-        this.password = password;
+        setEmail(email);
+        setPassword(password);
         this.joinDate = joinDate;
+    }
+    
+    public Customer(int id, String name, String email, String password, int year, int month, int dayOfMonth)
+    {
+        this.id = id;
+        this.name = name;
+        setEmail(email);
+        setPassword(password);
+        this.joinDate = new GregorianCalendar(year, month, dayOfMonth);
+    }
+    
+    public Customer(int id, String name, String email, String password)
+    {
+        this.id = id;
+        this.name = name;
+        setEmail(email);
+        setPassword(password);
     }
     
     /**
@@ -70,7 +93,7 @@ public class Customer
     * Method as accessor to get the join date of the customer
     * @return joinDate variable that stores information of join date of the customer
     */
-    public String getJoinDate()
+    public Calendar getJoinDate()
     {
         return joinDate;
     }
@@ -96,7 +119,17 @@ public class Customer
     */
     public void setEmail(String email)
     {
-        this.email = email;
+        String regex = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^-]+(?:\\.[a-zA-Z0-9_!#$%&'*+/=?`{|}~^-]+)*@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(email);
+        if(matcher.matches()==true)
+        {
+            this.email = email;
+        }
+        else
+        {
+            this.email = "";
+        }   
     }
     
     /**
@@ -104,22 +137,49 @@ public class Customer
     */
     public void setPassword(String password)
     {
-        this.password = password;
+        String regex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{6,}$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(password);
+        if(matcher.matches()==true)
+        {
+            this.password = password;
+        }
+        else
+        {
+            this.password = "";
+        }   
     }
     
     /**
     * Method as setter or mutator to set or change join date of customer
     */
-    public void setJoinDate(String joinDate)
+    public void setJoinDate(Calendar joinDate)
     {
         this.joinDate = joinDate;
     }
     
     /**
-    * Method to print name of the customer
-    */    
-    public void printData()
+    * Method as setter or mutator to set or change join date of customer
+    */
+    public void setJoinDate(int year, int month, int dayOfMonth)
     {
-        System.out.println(name);
+        this.joinDate = new GregorianCalendar(year, month, dayOfMonth);
+    }
+    
+    /**
+    * Method to set all variables of Customer to String
+    */    
+    public String toString()
+    {   
+        SimpleDateFormat ft = new SimpleDateFormat ("dd.MMMM.yyyy");
+        if(joinDate != null)
+        {
+            print = "Id = " + getId() + "\nName = " + getName() + "\nEmail = " + getEmail() + "\nPassword = " + getPassword() + "\nJoin Date = " + joinDate.toString() +"\n\n\n";
+        }
+        else if(joinDate == null)
+        {
+            print = "Id = " + getId() + "\nName = " + getName() + "\nEmail = " + getEmail() + "\nPassword = " + getPassword() + "\n\n\n";
+        }
+        return print;
     }
 }
