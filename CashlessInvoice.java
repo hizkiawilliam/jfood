@@ -5,12 +5,15 @@
  * @author Hizkia William Eben
  * @version 12.03.2020
  */
+
+import java.util.*;
+import java.text.*;
+
 public class CashlessInvoice extends Invoice
 {
     // instance variables - replace the example below with your own
     private static final PaymentType PAYMENT_TYPE = PaymentType.Cashless;
     private Promo promo;
-    private String ret;
 
     /**
      * Constructor for objects of class CashlessInvoice
@@ -56,12 +59,14 @@ public class CashlessInvoice extends Invoice
     
     public String toString()
     {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy");
+       
         if ((promo != null) && (promo.getActive() == true) && (getFood().getPrice() >= promo.getMinPrice()))
         {
-             ret = "===============Invoice===============" +
+              return "===============Invoice===============" +
                    "\nID: " + super.getId() +
                    "\nFood: " + super.getFood().getName() +
-                   "\nDate: " + super.getDate() +
+                   "\nDate: " + sdf.format(super.getDate().getTime()) +
                    "\nCustomer: " + super.getCustomer().getName() + 
                    "\nPromo: " + promo.getCode() +
                    "\nTotalPrice: " + super.getTotalPrice() +  
@@ -70,15 +75,14 @@ public class CashlessInvoice extends Invoice
         }
         else
         {
-             ret = "===============Invoice===============" +
+             return "===============Invoice===============" +
                    "\nID: " + super.getId() +
                    "\nFood: " + super.getFood().getName() +
-                   "\nDate: " + super.getDate() +
+                   "\nDate: " + sdf.format(super.getDate().getTime()) +
                    "\nCustomer: " + super.getCustomer().getName() + 
                    "\nTotalPrice: " + super.getTotalPrice() +  
                    "\nStatus: " + super.getInvoiceStatus() +        
                    "\nPayment Type: " + getPaymentType() + "\n\n";
         }
-        return ret;
     }
 }

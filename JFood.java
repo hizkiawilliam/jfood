@@ -25,16 +25,16 @@ public class JFood
         Customer customer2 = new Customer(42300,"Geraldy Christanto","geraldy.christanto@gmail.com","PemrogRaman1",2020,03,19);
         Customer customer3 = new Customer(45905,"Ananda Rizky Duto","ananda.rizkyo@gmail.com","PemrogRaman2");
         
-        System.out.println(customer1.toString());
-        System.out.println(customer2.toString());
-        System.out.println(customer3.toString());    
+        //System.out.println(customer1.toString());
+        //System.out.println(customer2.toString());
+        //System.out.println(customer3.toString());    
         
-        customer1.setEmail("darrell.yonathan@gmail.com");
-        customer1.setPassword("PemrogRaman3");      
+        //customer1.setEmail("darrell.yonathan@gmail.com");
+        //customer1.setPassword("PemrogRaman3");      
         
-        System.out.println(customer1.toString());
-        System.out.println(customer2.toString());
-        System.out.println(customer3.toString());  
+        //System.out.println(customer1.toString());
+        //System.out.println(customer2.toString());
+        //System.out.println(customer3.toString());  
         
         Promo promo1 = new Promo(1,"Promo Mahasiswa",3000,15000,true);
         CashlessInvoice invoice1 = new CashlessInvoice(1, food1,customer1,InvoiceStatus.Ongoing,promo1);
