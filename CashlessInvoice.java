@@ -10,18 +10,19 @@ public class CashlessInvoice extends Invoice
     // instance variables - replace the example below with your own
     private static final PaymentType PAYMENT_TYPE = PaymentType.Cashless;
     private Promo promo;
+    private String ret;
 
     /**
      * Constructor for objects of class CashlessInvoice
      */
-    public CashlessInvoice(int id, Food food, String date, Customer customer, InvoiceStatus invoiceStatus)
+    public CashlessInvoice(int id, Food food, Customer customer, InvoiceStatus invoiceStatus)
     {
-        super(id,food, date, customer, invoiceStatus);
+        super(id,food, customer, invoiceStatus);
     }
     
-    public CashlessInvoice(int id, Food food, String date, Customer customer, InvoiceStatus invoiceStatus, Promo promo)
+    public CashlessInvoice(int id, Food food, Customer customer, InvoiceStatus invoiceStatus, Promo promo)
     {
-        super(id,food, date, customer, invoiceStatus);
+        super(id,food, customer, invoiceStatus);
         this.promo = promo;
     }
 
@@ -53,19 +54,31 @@ public class CashlessInvoice extends Invoice
         }
     }
     
-    public void printData()
+    public String toString()
     {
-        System.out.println("===============Invoice===============");
-        System.out.println("ID: " + super.getId());
-        System.out.println("Food: " + super.getFood().getName());        
-        System.out.println("Date: " + super.getDate());
-        System.out.println("Customer: " + super.getCustomer().getName()); 
         if ((promo != null) && (promo.getActive() == true) && (getFood().getPrice() >= promo.getMinPrice()))
         {
-            System.out.println("Promo: " + promo.getCode());             
+             ret = "===============Invoice===============" +
+                   "\nID: " + super.getId() +
+                   "\nFood: " + super.getFood().getName() +
+                   "\nDate: " + super.getDate() +
+                   "\nCustomer: " + super.getCustomer().getName() + 
+                   "\nPromo: " + promo.getCode() +
+                   "\nTotalPrice: " + super.getTotalPrice() +  
+                   "\nStatus: " + super.getInvoiceStatus() +        
+                   "\nPayment Type: " + getPaymentType() + "\n\n";
         }
-        System.out.println("TotalPrice: " + super.getTotalPrice());  
-        System.out.println("Status: " + super.getInvoiceStatus());        
-        System.out.println("Payment Type: " + getPaymentType());  
+        else
+        {
+             ret = "===============Invoice===============" +
+                   "\nID: " + super.getId() +
+                   "\nFood: " + super.getFood().getName() +
+                   "\nDate: " + super.getDate() +
+                   "\nCustomer: " + super.getCustomer().getName() + 
+                   "\nTotalPrice: " + super.getTotalPrice() +  
+                   "\nStatus: " + super.getInvoiceStatus() +        
+                   "\nPayment Type: " + getPaymentType() + "\n\n";
+        }
+        return ret;
     }
 }

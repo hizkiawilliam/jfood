@@ -1,8 +1,8 @@
 /**
- * Write a description of class Location here.
+ * Class Location is class that stores information for every location object
  *
  * @author Hizkia William Eben
- * @version 12.03.2020
+ * @version 20.03.2020
  */
 public class Location
 {
@@ -75,10 +75,12 @@ public class Location
     }
     
     /**
-    * Method to set all variables Location to String
+    * Method to return all variables Location as String
     */    
     public String toString()
     {
-         return "Province = " + getProvince() + "City = " + getCity() + "Description = " + getDescription();
+         return "Province = " + getProvince() + 
+                "City = " + getCity() + 
+                "Description = " + getDescription();
     }
 }

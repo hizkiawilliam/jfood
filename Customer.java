@@ -1,14 +1,14 @@
 /**
- * Write a description of class Customer here.
- *
- * @author Hizkia William Eben
- * @version 19.03.2020
- */
-
+* Class Costumer is class that stores information for every customer object
+*
+* @author Hizkia William Eben
+* @version 20.03.2020
+*/
+            
 import java.util.*;
 import java.util.regex.*;
 import java.text.*;
-
+            
 public class Customer
 {
     private int id;
@@ -17,16 +17,16 @@ public class Customer
     private String password;
     private Calendar joinDate;
     private String print;
-   
-
+                   
+                
     /**
-     * Constructor for objects of class Customer
-     * @param id variable for identifying Customer
-     * @param name variable to store name information of customer
-     * @param email variable to store email information
-     * @param password variable to store password
-     * @param joinDate variable to store join date of customer
-     */
+    * Constructor for objects of class Customer
+    * @param id variable for identifying Customer
+    * @param name variable to store name information of customer
+    * @param email variable to store email information
+    * @param password variable to store password
+    * @param joinDate variable to store join date of customer
+    */
     public Customer(int id, String name, String email, String password, Calendar joinDate)
     {
         this.id = id;
@@ -36,6 +36,16 @@ public class Customer
         this.joinDate = joinDate;
     }
     
+    /**
+    * Constructor for objects of class Customer with specific join date param
+    * @param id variable for identifying Customer
+    * @param name variable to store name information of customer
+    * @param email variable to store email information
+    * @param password variable to store password
+    * @param year variable to store join year of customer
+    * @param month variable to store join month of customer
+    * @param dayOfMonth variable to store join day of customer
+    */                
     public Customer(int id, String name, String email, String password, int year, int month, int dayOfMonth)
     {
         this.id = id;
@@ -45,23 +55,32 @@ public class Customer
         this.joinDate = new GregorianCalendar(year, month, dayOfMonth);
     }
     
+    /**
+    * Constructor for objects of class Customer without join date param
+    * @param id variable for identifying Customer
+    * @param name variable to store name information of customer
+    * @param email variable to store email information
+    * @param password variable to store password
+    */ 
     public Customer(int id, String name, String email, String password)
     {
         this.id = id;
         this.name = name;
         setEmail(email);
         setPassword(password);
+        this.joinDate = new GregorianCalendar();
+        
     }
-    
+                
     /**
-     * Method as accessor to get id of the costumer
-     * @return id variable that stores id of customer
-     */
+    * Method as accessor to get id of the costumer
+    * @return id variable that stores id of customer
+    */
     public int getId()
     {
         return id;
     }
-    
+                
     /**
     * Method as accessor to get name of the customer
     * @return name variable that stores name of customer
@@ -70,7 +89,7 @@ public class Customer
     {
         return name;
     }
-
+            
     /**
     * Method as accessor to get email of the customer
     * @return email variable that stores email of customer
@@ -79,7 +98,7 @@ public class Customer
     {
         return email;
     }
-
+            
     /**
     * Method as accessor to get password of the customer
     * @return password variable that stores password of the customer
@@ -88,7 +107,7 @@ public class Customer
     {
         return password;
     }
-    
+                
     /**
     * Method as accessor to get the join date of the customer
     * @return joinDate variable that stores information of join date of the customer
@@ -97,7 +116,7 @@ public class Customer
     {
         return joinDate;
     }
-    
+                
     /**
     * Method as setter or mutator to set or change id of customer
     */
@@ -105,7 +124,7 @@ public class Customer
     {
         this.id = id;
     }
-    
+                
     /**
     * Method as setter or mutator to set or change name of customer
     */
@@ -113,9 +132,9 @@ public class Customer
     {
         this.name = name;
     }
-    
+                
     /**
-    * Method as setter or mutator to set or change name of customer
+    * Method as setter or mutator to set or change email of customer with regex checking
     */
     public void setEmail(String email)
     {
@@ -131,9 +150,9 @@ public class Customer
             this.email = "";
         }   
     }
-    
+                
     /**
-    * Method as setter or mutator to set or change password of customer
+    * Method as setter or mutator to set or change password of customer with regex checking
     */
     public void setPassword(String password)
     {
@@ -149,7 +168,7 @@ public class Customer
             this.password = "";
         }   
     }
-    
+            
     /**
     * Method as setter or mutator to set or change join date of customer
     */
@@ -157,29 +176,38 @@ public class Customer
     {
         this.joinDate = joinDate;
     }
-    
+            
     /**
-    * Method as setter or mutator to set or change join date of customer
+    * Method as setter or mutator to set or change join date of customer with specific param
     */
     public void setJoinDate(int year, int month, int dayOfMonth)
     {
-        this.joinDate = new GregorianCalendar(year, month, dayOfMonth);
+       this.joinDate = new GregorianCalendar(year, month, dayOfMonth);
     }
-    
+            
     /**
-    * Method to set all variables of Customer to String
+    * Method to return all variables of Customer as String
     */    
     public String toString()
-    {   
-        SimpleDateFormat ft = new SimpleDateFormat ("dd.MMMM.yyyy");
-        if(joinDate != null)
-        {
-            print = "Id = " + getId() + "\nName = " + getName() + "\nEmail = " + getEmail() + "\nPassword = " + getPassword() + "\nJoin Date = " + joinDate.toString() +"\n\n\n";
-        }
-        else if(joinDate == null)
-        {
-            print = "Id = " + getId() + "\nName = " + getName() + "\nEmail = " + getEmail() + "\nPassword = " + getPassword() + "\n\n\n";
-        }
-        return print;
+    {  
+       SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy");
+       if(joinDate != null)
+       {
+           print = "========Customer========" +
+                   "\nId = " + getId() + 
+                   "\nNama = " + getName() +
+                   "\nEmail = " + getEmail() + 
+                   "\nPassword = " + getPassword() + 
+                   "\nTanggal Join = " + sdf.format(getJoinDate().getTime())+"\n\n";
+       }
+       else if(joinDate == null)
+       {
+           print = "========Customer========" +
+                   "\nId = " + getId() + 
+                   "\nNama = " + getName() + 
+                   "\nEmail = " + getEmail() + 
+                   "\nPassword = " + getPassword() + "\n\n";
+       }
+       return print;
     }
 }

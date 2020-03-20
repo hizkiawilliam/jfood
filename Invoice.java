@@ -1,14 +1,17 @@
 /**
- * Write a description of class Invoice here.
+ * Class Invoice is class that stores information for every invoice object
  *
  * @author Hizkia William Eben
- * @version 12.03.2020
+ * @version 20.03.2020
  */
+
+import java.util.*;
+
 public abstract class Invoice
 {
     private int id;
     private Food food;
-    private String date;
+    private Calendar date;
     protected int totalPrice;
     private Customer customer;
     private InvoiceStatus status;
@@ -20,15 +23,15 @@ public abstract class Invoice
      * @param idFood variable to store id of foods
      * @param date variable to store email information
      * @param customer variable to store information about customer
-     * @param totalPrice variable to store information about total price
+     * @param invoiceStatus variable to store information about invoice status
      */
-    public Invoice(int id, Food food, String date, Customer customer, InvoiceStatus status)
+    public Invoice(int id, Food food, Customer customer, InvoiceStatus status)
     {
         this.id = id;
         this.food = food;
-        this.date = date;
         this.customer = customer;
         this.status = status;
+        this.date = new GregorianCalendar();
     }
     
     /**
@@ -53,7 +56,7 @@ public abstract class Invoice
      * Method as accessor to get date of the invoice created
      * @return date variable that stores date of the invoice
      */
-    public String getDate()
+    public Calendar getDate()
     {
         return date;
     }
@@ -93,6 +96,7 @@ public abstract class Invoice
     
     /**
     * Method as setter or mutator to set id of the invoice
+    * @param id variable for identifying Invoice
     */
     public void setId(int id)
     {
@@ -101,6 +105,7 @@ public abstract class Invoice
     
     /**
     * Method as setter or mutator to set idFood of the invoice
+    * @param idFood variable to store id of foods
     */
     public void setFoods(Food food)
     {
@@ -109,10 +114,20 @@ public abstract class Invoice
     
     /**
     * Method as setter or mutator to set date of the invoice
+    * @param date variable to store email information
     */
-    public void setDate(String date)
+    public void setDate(Calendar date)
     {
         this.date = date;
+    }
+    
+    /**
+    * Method as setter or mutator to set date of the invoice
+    * @param date variable to store email information
+    */
+    public void setDate(int year, int month, int dayOfMonth)
+    {
+        this.date = new GregorianCalendar(year, month, dayOfMonth);
     }
     
     /**
@@ -122,6 +137,7 @@ public abstract class Invoice
     
     /**
     * Method as setter or mutator to set customer of the invoice
+    * @param customer variable to store information about customer
     */
     public void setCustomer(Customer customer)
     {
@@ -138,6 +154,7 @@ public abstract class Invoice
     
     /**
     * Method as setter or mutator to set invoice status of the invoice
+    * @param invoiceStatus variable to store information about invoice status
     */
     public void setInvoiceStatus(InvoiceStatus status)
     {
@@ -147,5 +164,5 @@ public abstract class Invoice
     /**
     * Method to print data of the invoice
     */
-    public abstract void printData();
+    public abstract String toString();
 }

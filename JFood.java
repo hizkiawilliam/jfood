@@ -23,26 +23,33 @@ public class JFood
         Food food3 = new Food(1003,"Roti Cokelat",seller1,7000,FoodCategory.Bakery);
         Customer customer1 = new Customer(42825,"Darrell Yonathan","131802938","da", new GregorianCalendar(2020,03,19));
         Customer customer2 = new Customer(42300,"Geraldy Christanto","geraldy.christanto@gmail.com","PemrogRaman1",2020,03,19);
-        Customer customer3 = new Customer(42300,"Ananda Rizky Duto","ananda.rizkyo@gmail.com","PemrogRaman2");
+        Customer customer3 = new Customer(45905,"Ananda Rizky Duto","ananda.rizkyo@gmail.com","PemrogRaman2");
         
         System.out.println(customer1.toString());
         System.out.println(customer2.toString());
-        System.out.println(customer3.toString());        
-        //Promo promo1 = new Promo(1,"Promo Mahasiswa",3000,15000,true);
-        //CashlessInvoice invoice1 = new CashlessInvoice(1, food1, "12,03,2020",customer1,InvoiceStatus.Ongoing);
-        //CashlessInvoice invoice2 = new CashlessInvoice(2, food2, "12,03,2020",customer2,InvoiceStatus.Finished,promo1);
+        System.out.println(customer3.toString());    
+        
+        customer1.setEmail("darrell.yonathan@gmail.com");
+        customer1.setPassword("PemrogRaman3");      
+        
+        System.out.println(customer1.toString());
+        System.out.println(customer2.toString());
+        System.out.println(customer3.toString());  
+        
+        Promo promo1 = new Promo(1,"Promo Mahasiswa",3000,15000,true);
+        CashlessInvoice invoice1 = new CashlessInvoice(1, food1,customer1,InvoiceStatus.Ongoing,promo1);
         //CashlessInvoice invoice3 = new CashlessInvoice(3, food3, "12,03,2020",customer2,InvoiceStatus.Finished,promo1);
-        //CashInvoice invoice4 = new CashInvoice(4, food1, "13,03,2020",customer2,InvoiceStatus.Ongoing);
+        CashInvoice invoice4 = new CashInvoice(4, food1,customer2,InvoiceStatus.Ongoing);
         //CashInvoice invoice5 = new CashInvoice(5, food2, "13,03,2020",customer2,InvoiceStatus.Finished,7000);        
         
-        //invoice1.setTotalPrice();
-        //invoice2.setTotalPrice();
+        invoice1.setTotalPrice();
+        invoice4.setTotalPrice();
         //invoice3.setTotalPrice();
         //invoice4.setTotalPrice();
         //invoice5.setTotalPrice();        
         
-        //invoice1.printData();
-        //invoice2.printData();
+        System.out.println(invoice1.toString());
+        System.out.println(invoice4.toString());
         //invoice3.printData();
         //invoice4.printData();
         //invoice5.printData();        

@@ -1,8 +1,8 @@
 /**
- * Write a description of class Seller here.
+ * Class Seller is class that stores information for every seller object
  *
  * @author Hizkia William Eben
- * @version 12.03.2020
+ * @version 20.03.2020
  */
 public class Seller
 {
@@ -117,10 +117,13 @@ public class Seller
     }
     
     /**
-    * Method to set all variables Seller to String
+    * Method to return all variables Seller as String
     */    
     public String toString()
     {
-         return "Id = " + getId() + "Name = " + getName() + "Phone Number = " + getPhoneNumber() + "Location =" + getLocation().getCity();
+         return "Id = " + getId() + 
+                "Name = " + getName() + 
+                "Phone Number = " + getPhoneNumber() + 
+                "Location =" + getLocation().getCity();
     }
 }

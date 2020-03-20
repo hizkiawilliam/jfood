@@ -5,6 +5,10 @@
  * @author Hizkia William Eben
  * @version 13.03.2020
  */
+
+import java.util.*;
+import java.text.*;
+
 public class CashInvoice extends Invoice
 {
     // instance variables - replace the example below with your own
@@ -14,14 +18,15 @@ public class CashInvoice extends Invoice
     /**
      * Constructor for objects of class CashInvoice
      */
-    public CashInvoice(int id, Food food, String date, Customer customer, InvoiceStatus invoiceStatus)
+
+    public CashInvoice(int id, Food food, Customer customer, InvoiceStatus invoiceStatus)
     {
-        super(id,food, date, customer, invoiceStatus);
+        super(id,food, customer, invoiceStatus);
     }
     
-    public CashInvoice(int id, Food food, String date, Customer customer, InvoiceStatus invoiceStatus, int deliveryFee)
+    public CashInvoice(int id, Food food, Customer customer, InvoiceStatus invoiceStatus, int deliveryFee)
     {
-        super(id,food, date, customer, invoiceStatus);
+        super(id,food, customer, invoiceStatus);
         this.deliveryFee = deliveryFee;
     }
 
@@ -31,7 +36,7 @@ public class CashInvoice extends Invoice
      * @param  y  a sample parameter for a method
      * @return    the sum of x and y
      */
-    @Override
+    //@Override
     public PaymentType getPaymentType()
     {
         return PAYMENT_TYPE;
@@ -58,16 +63,16 @@ public class CashInvoice extends Invoice
         }
     }
     
-    public void printData()
-    {
-        System.out.println("===============Invoice===============");
-        System.out.println("ID: " + super.getId());
-        System.out.println("Food: " + super.getFood().getName());        
-        System.out.println("Date: " + super.getDate());
-        System.out.println("Customer: " + super.getCustomer().getName()); 
-        System.out.println("Delivery Fee: " + getDeliveryFee());         
-        System.out.println("TotalPrice: " + super.getTotalPrice());  
-        System.out.println("Status: " + super.getInvoiceStatus());        
-        System.out.println("Payment Type: " + getPaymentType());  
+    public String toString()
+    {        
+        return "===============Invoice===============" +
+               "\nID: " + super.getId() +
+               "\nFood: " + super.getFood().getName() +
+               "\nDate: " + super.getDate() +
+               "\nCustomer: " + super.getCustomer().getName() +
+               "\nDelivery Fee: " + getDeliveryFee() +        
+               "\nTotalPrice: " + super.getTotalPrice() +
+               "\nStatus: " + super.getInvoiceStatus() +
+               "\nPayment Type: " + getPaymentType();  
     }
 }
