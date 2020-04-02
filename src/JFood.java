@@ -17,6 +17,32 @@ public class JFood
     public static void main(String[] args)
     {
         Location location1 = new Location("Depok", "Jawa Barat", "Universitas Indonesia");
+        DatabaseSeller.addSeller(new Seller(69, "Ruki R.", "ruki.r@ui.ac.id", "08229812470", location1));
+
+        Calendar calendar = new GregorianCalendar(2020, 4, 2);
+        DatabaseCustomer.addCustomer(new Customer(1, "Hizkia", "hizkia.william@gmail.com", "curuchuchu44",calendar));
+        DatabaseCustomer.addCustomer(new Customer(2, "Hizkia", "hizkia.william@gmail.com", "curuchuchu44", 2020, 4, 2));
+        DatabaseCustomer.addCustomer(new Customer(3, "Rama", "rama@ui.ac.id", "notPassword2"));
+
+        System.out.println("Daftar Customer: ");
+        for (Customer customers : DatabaseCustomer.getCustomerDatabase())
+        {
+            System.out.println(customers.getName());
+        }
+        System.out.println("\n");
+
+        DatabaseFood.addFood(new Food(1,"Fried Chicken", DatabaseSeller.getSellerById(DatabaseSeller.getLastId()), 16000, FoodCategory.Western));
+        DatabaseFood.addFood(new Food(2,"French Fries", DatabaseSeller.getSellerById(DatabaseSeller.getLastId()), 50000, FoodCategory.Western));
+        DatabaseFood.addFood(new Food(3,"Nasi Hainan", DatabaseSeller.getSellerById(DatabaseSeller.getLastId()), 100000, FoodCategory.Rice));
+
+        System.out.println("Daftar Food Category Western: ");
+        for (Food food : DatabaseFood.getFoodByCategory(FoodCategory.Western))
+        {
+            System.out.println(food.getName());
+        }
+
+        DatabaseCustomer.getCustomerById(DatabaseCustomer.getLastId());
+        /*
         Seller seller1 = new Seller(42806,"Hizkia William Eben","williamhizkia@gmail.com","082298840430",location1);
         Food food1 = new Food(1001,"White Coffee",seller1,25000,FoodCategory.Coffee);
         Food food2 = new Food(1002,"Ayam Bakar Kecap",seller1,17000,FoodCategory.Beverages);
@@ -63,5 +89,7 @@ public class JFood
         //listfood1.addFood(food1);
         //listfood1.addFood(food2);
         //listfood1.getListFood();
+
+         */
     }
 }

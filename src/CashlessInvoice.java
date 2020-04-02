@@ -18,14 +18,14 @@ public class CashlessInvoice extends Invoice
     /**
      * Constructor for objects of class CashlessInvoice
      */
-    public CashlessInvoice(int id, Food food, Customer customer, InvoiceStatus invoiceStatus)
+    public CashlessInvoice(int id, ArrayList<Food> foods, Customer customer)
     {
-        super(id,food, customer, invoiceStatus);
+        super(id,foods, customer);
     }
     
-    public CashlessInvoice(int id, Food food, Customer customer, InvoiceStatus invoiceStatus, Promo promo)
+    public CashlessInvoice(int id, ArrayList<Food> foods, Customer customer, Promo promo)
     {
-        super(id,food, customer, invoiceStatus);
+        super(id,foods, customer);
         this.promo = promo;
     }
 
@@ -47,25 +47,58 @@ public class CashlessInvoice extends Invoice
 
     public void setTotalPrice()
     {
-        if((promo != null)&&(promo.getActive() == true)&&(getFood().getPrice() >= promo.getMinPrice()))
+        for(Food foods: getFoods())
         {
-            super.totalPrice = getFood().getPrice() - promo.getDiscount();
-        }   
-        else
-        {
-            super.totalPrice = getFood().getPrice();
+            if ((promo != null) && (promo.getActive() == true) && (foods.getPrice() >= promo.getMinPrice())) {
+                super.totalPrice += foods.getPrice() - promo.getDiscount();
+            } else {
+                super.totalPrice += foods.getPrice();
+            }
         }
     }
     
     public String toString()
     {
+        int tempPrice = 0;
+        String foodName = "";
+        for (Food food : getFoods())
+        {
+            tempPrice += food.getPrice();
+            foodName += food.getName() + ", ";
+        }
+        SimpleDateFormat format1 = new SimpleDateFormat("dd MMMM yyyy");
+        String date = format1.format(getDate().getTime());
+        if (getPromo() != null && getPromo().getActive() == true && tempPrice > getPromo().getMinPrice())
+        {
+            return "\n================Invoice================" + "\n" +
+                    "ID: " + getId() + "\n" +
+                    "Name: " + foodName + "\n" +
+                    "Date: " + date + "\n" +
+                    "Customer: " + getCustomer().getName() + "\n" +
+                    "Promo: " + getPromo().getCode() + "\n" +
+                    "Total Price: " + totalPrice + "\n" +
+                    "Status: " + getInvoiceStatus() + "\n" +
+                    "Payment Type: " + getPaymentType() + "\n";
+        }
+        else
+        {
+            return "\n================Invoice================" + "\n" +
+                    "ID: " + getId() + "\n" +
+                    "Name: " + foodName + "\n" +
+                    "Date: " + date + "\n" +
+                    "Customer: " + getCustomer().getName() + "\n" +
+                    "Total Price: " + totalPrice + "\n" +
+                    "Status: " + getInvoiceStatus() + "\n" +
+                    "Payment Type: " + getPaymentType() + "\n";
+        }
+        /*
         SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy");
        
-        if ((promo != null) && (promo.getActive() == true) && (getFood().getPrice() >= promo.getMinPrice()))
+        if ((promo != null) && (promo.getActive() == true) && (getFoods().getPrice() >= promo.getMinPrice()))
         {
               return "===============Invoice===============" +
                    "\nID: " + super.getId() +
-                   "\nFood: " + super.getFood().getName() +
+                   "\nFood: " + super.getFoods().getName() +
                    "\nDate: " + sdf.format(super.getDate().getTime()) +
                    "\nCustomer: " + super.getCustomer().getName() + 
                    "\nPromo: " + promo.getCode() +
@@ -77,12 +110,14 @@ public class CashlessInvoice extends Invoice
         {
              return "===============Invoice===============" +
                    "\nID: " + super.getId() +
-                   "\nFood: " + super.getFood().getName() +
+                   "\nFood: " + super.getFoods().getName() +
                    "\nDate: " + sdf.format(super.getDate().getTime()) +
                    "\nCustomer: " + super.getCustomer().getName() + 
                    "\nTotalPrice: " + super.getTotalPrice() +  
                    "\nStatus: " + super.getInvoiceStatus() +        
                    "\nPayment Type: " + getPaymentType() + "\n\n";
         }
+
+         */
     }
 }

@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 /**
  * Write a description of class DatabaseCustomer here.
@@ -8,7 +9,8 @@
 public class DatabaseCustomer
 {
     // instance variables - replace the example below with your own
-    private String[] listCustomer;
+    private static ArrayList<Customer> CUSTOMER_DATABASE = new ArrayList<Customer>();
+    private static int lastId = 0;
 
     /**
      * Constructor for objects of class DatabaseCustomer
@@ -18,25 +20,72 @@ public class DatabaseCustomer
     }
 
     /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
+     * Method to show customer database
+     * @return customer database
      */
-    public boolean addCustomer(Customer customer)
+    public static ArrayList<Customer> getCustomerDatabase()
     {
-        return false;
+        return CUSTOMER_DATABASE;
     }
-    public boolean removeCustomer(Customer customer)
+
+    /**
+     * Method to show last id
+     * @return last id in database
+     */
+    public static int getLastId()
     {
-        return false;
+        return lastId;
     }
-    public Customer getCustomer()
+
+    /**
+     * Method to show customer by id
+     * @return customer
+     */
+    public static Customer getCustomerById(int id)
     {
+        for(Customer customer:CUSTOMER_DATABASE)
+        {
+            if (id == customer.getId())
+            {
+                return customer;
+            }
+        }
         return null;
     }
-    public String[] getListCustomer()
+
+    /**
+     * Method to add customer
+     * @return false default return param to check successability
+     */
+    public static boolean addCustomer(Customer customer)
     {
-        return listCustomer;
+        for(Customer customers:CUSTOMER_DATABASE)
+        {
+            if (customers.getEmail() == customer.getEmail())
+            {
+                return false;
+            }
+        }
+        CUSTOMER_DATABASE.add(customer);
+        lastId = customer.getId();
+        return true;
     }
+
+    /**
+     * Method to remove customer
+     * @return false default return param to check successability
+     */
+    public static boolean removeCustomer(int id) {
+        for(int i = 0;  i < CUSTOMER_DATABASE.size(); i++)
+        {
+            Customer customer = CUSTOMER_DATABASE.get(i);
+            if (id == customer.getId())
+            {
+                CUSTOMER_DATABASE.remove(id);
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

@@ -10,9 +10,9 @@ import java.util.*;
 public abstract class Invoice
 {
     private int id;
-    private Food food;
+    private ArrayList<Food> foods;
     private Calendar date;
-    protected int totalPrice;
+    protected int totalPrice = 0;
     private Customer customer;
     private InvoiceStatus status;
     private PaymentType paymentType;
@@ -20,18 +20,16 @@ public abstract class Invoice
     /**
      * Constructor for objects of class Customer
      * @param id variable for identifying Invoice
-     * @param idFood variable to store id of foods
-     * @param date variable to store email information
+     * @param foods variable that stores object food
      * @param customer variable to store information about customer
-     * @param invoiceStatus variable to store information about invoice status
      */
-    public Invoice(int id, Food food, Customer customer, InvoiceStatus status)
+    public Invoice(int id, ArrayList<Food> foods, Customer customer)
     {
         this.id = id;
-        this.food = food;
+        this.foods = foods;
         this.customer = customer;
-        this.status = status;
         this.date = new GregorianCalendar();
+        this.status = InvoiceStatus.Ongoing;
     }
     
     /**
@@ -47,9 +45,9 @@ public abstract class Invoice
      * Method as accessor or getter to get idFood of the invoice
      * @return idFood variable that stores idFood of the invoice
      */
-    public Food getFood()
+    public ArrayList<Food> getFoods()
     {
-        return food;
+        return foods;
     }
     
     /**
@@ -105,11 +103,11 @@ public abstract class Invoice
     
     /**
     * Method as setter or mutator to set idFood of the invoice
-    * @param idFood variable to store id of foods
+    * @param foods variable to store id of foods
     */
-    public void setFoods(Food food)
+    public void setFoods(ArrayList<Food> foods)
     {
-        this.food = food;
+        this.foods = foods;
     }
     
     /**
@@ -123,7 +121,9 @@ public abstract class Invoice
     
     /**
     * Method as setter or mutator to set date of the invoice
-    * @param date variable to store email information
+    * @param year variable to store year
+    * @param month variable to store month
+    * @param dayOfMonth variable to store day
     */
     public void setDate(int year, int month, int dayOfMonth)
     {
@@ -154,7 +154,7 @@ public abstract class Invoice
     
     /**
     * Method as setter or mutator to set invoice status of the invoice
-    * @param invoiceStatus variable to store information about invoice status
+    * @param status variable to store information about invoice status
     */
     public void setInvoiceStatus(InvoiceStatus status)
     {

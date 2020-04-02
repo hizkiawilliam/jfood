@@ -19,23 +19,17 @@ public class CashInvoice extends Invoice
      * Constructor for objects of class CashInvoice
      */
 
-    public CashInvoice(int id, Food food, Customer customer, InvoiceStatus invoiceStatus)
+    public CashInvoice(int id, ArrayList<Food> foods, Customer customer)
     {
-        super(id,food, customer, invoiceStatus);
+        super(id, foods, customer);
     }
     
-    public CashInvoice(int id, Food food, Customer customer, InvoiceStatus invoiceStatus, int deliveryFee)
+    public CashInvoice(int id, ArrayList<Food> foods, Customer customer, int deliveryFee)
     {
-        super(id,food, customer, invoiceStatus);
+        super(id, foods, customer);
         this.deliveryFee = deliveryFee;
     }
 
-    /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
-     */
     //@Override
     public PaymentType getPaymentType()
     {
@@ -55,26 +49,51 @@ public class CashInvoice extends Invoice
     {
         if(deliveryFee > 0)
         {
-            super.totalPrice = getFood().getPrice() + getDeliveryFee();
+            for(Food foods:getFoods()) {
+                super.totalPrice += foods.getPrice();
+            }
+            super.totalPrice += getDeliveryFee();
         }   
         else if(deliveryFee == 0)
         {
-            super.totalPrice = getFood().getPrice();
+            for(Food foods:getFoods()) {
+                super.totalPrice += foods.getPrice();
+            }
         }
     }
     
     public String toString()
-    {        
+    {
+        String foodName = "";
+        for (Food food : getFoods())
+        {
+            foodName += food.getName() + ", ";
+        }
+        SimpleDateFormat format1 = new SimpleDateFormat("dd MMMM yyyy");
+        String date = format1.format(getDate().getTime());
+        return "\n================Invoice================" + "\n" +
+                "ID: " + getId() + "\n" +
+                "Name: " + foodName + "\n" +
+                "Date: " + date + "\n" +
+                "Customer: " + getCustomer().getName() + "\n" +
+                "Delivery Fee: " + getDeliveryFee() + "\n" +
+                "Total Price: " + totalPrice + "\n" +
+                "Status: " + getInvoiceStatus() + "\n" +
+                "Payment Type: " + getPaymentType() + "\n";
+        /*
         SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy");
-        
-        return "===============Invoice===============" +
+        String string = "";
+        string = "===============Invoice===============" +
                "\nID: " + super.getId() +
-               "\nFood: " + super.getFood().getName() +
+               "\nFood: " + super.getFoods().getName() +
                "\nDate: " + sdf.format(super.getDate().getTime()) +
                "\nCustomer: " + super.getCustomer().getName() +
-               "\nDelivery Fee: " + getDeliveryFee() +        
+               "\nDelivery Fee: " + getDeliveryFee() +
                "\nTotalPrice: " + super.getTotalPrice() +
                "\nStatus: " + super.getInvoiceStatus() +
-               "\nPayment Type: " + getPaymentType();  
+               "\nPayment Type: " + getPaymentType();
+        return string;
+
+         */
     }
 }
