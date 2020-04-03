@@ -2,7 +2,7 @@
  * Class Seller is class that stores information for every seller object
  *
  * @author Hizkia William Eben
- * @version 20.03.2020
+ * @version 03.04.2020
  */
 public class Seller
 {

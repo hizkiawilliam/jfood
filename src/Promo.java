@@ -3,7 +3,7 @@
  * Write a description of class Promo here.
  *
  * @author Hizkia William Eben
- * @version 12.03.2020
+ * @version 03.04.2020
  */
 public class Promo
 {
@@ -25,14 +25,8 @@ public class Promo
         this.minPrice = minPrice;
         this.active = active;
     }
-
-    /**
-     * An example of a method - replace this comment with your own
-     *
-     * @param  y  a sample parameter for a method
-     * @return    the sum of x and y
-     */
-     public int getId()
+    
+    public int getId()
     {
         return id;
     }
@@ -77,6 +71,11 @@ public class Promo
     */    
     public String toString()
     {
-         return "Id = " + getId() + "Code = " + getCode() + "Discount = " + getDiscount() + "Min Price " + getDiscount() + "Active Status" + getActive();
+         return  "==========Promo==========" +
+                 "\nId = " + getId() +
+                 "\nCode = " + getCode() +
+                 "\nDiscount = " + getDiscount() +
+                 "\nMin Price " + getDiscount() +
+                 "\nActive Status" + getActive();
     }
 }

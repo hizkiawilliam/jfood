@@ -4,7 +4,7 @@ import java.util.ArrayList;
  * Write a description of class DatabaseCustomer here.
  *
  * @author Hizkia William Eben
- * @version 12.03.2020
+ * @version 03.04.2020
  */
 public class DatabaseCustomer
 {

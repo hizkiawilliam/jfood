@@ -3,7 +3,7 @@
  * Write a description of class DatabaseFood here.
  *
  * @author Hizkia William Eben
- * @version 12.03.2020
+ * @version 03.04.2020
  */
 
 import java.util.*;
@@ -36,6 +36,13 @@ public class DatabaseSeller
     */
     public static boolean addSeller(Seller seller)
     {
+        for(Seller sellerCheck:SELLER_DATABASE)
+        {
+            if (sellerCheck.getId() == seller.getId())
+            {
+                return false;
+            }
+        }
         SELLER_DATABASE.add(seller);
         lastId = seller.getId();
         return true;

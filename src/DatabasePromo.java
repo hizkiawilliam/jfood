@@ -1,11 +1,12 @@
-import java.util.ArrayList;
-
 /**
  * Write a description of class DatabasePromo here.
  *
  * @author Hizkia William Eben
- * @version 12.03.2020
+ * @version 03.04.2020
  */
+
+import  java.util.ArrayList;
+
 public class DatabasePromo
 {
     // instance variables - replace the example below with your own
@@ -13,7 +14,7 @@ public class DatabasePromo
     private static int lastId = 0;
 
     /**
-     * Method to show food list
+     * Method to show promo list
      * @return Database of promo
      */
     public static ArrayList<Promo> getPromoDatabase()
@@ -68,6 +69,13 @@ public class DatabasePromo
      */
     public static boolean addPromo(Promo promo)
     {
+        for(Promo promoCheck:PROMO_DATABASE)
+        {
+            if (promoCheck.getCode() == promo.getCode())
+            {
+                return false;
+            }
+        }
         PROMO_DATABASE.add(promo);
         lastId = promo.getId();
         return true;

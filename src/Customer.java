@@ -2,7 +2,7 @@
 * Class Costumer is class that stores information for every customer object
 *
 * @author Hizkia William Eben
-* @version 20.03.2020
+* @version 03.04.2020
 */
             
 import java.util.*;
@@ -16,8 +16,7 @@ public class Customer
     private String email;
     private String password;
     private Calendar joinDate;
-                   
-                
+
     /**
     * Constructor for objects of class Customer
     * @param id variable for identifying Customer
@@ -198,15 +197,15 @@ public class Customer
                    "\nNama = " + getName() +
                    "\nEmail = " + getEmail() + 
                    "\nPassword = " + getPassword() + 
-                   "\nTanggal Join = " + sdf.format(getJoinDate().getTime())+"\n\n";
+                   "\nTanggal Join = " + sdf.format(getJoinDate().getTime())+"\n";
        }
        else
        {
-           return  "========Customer========" +
+           return  "\n========Customer========" +
                    "\nId = " + getId() + 
                    "\nNama = " + getName() + 
                    "\nEmail = " + getEmail() + 
-                   "\nPassword = " + getPassword() + "\n\n";
+                   "\nPassword = " + getPassword() + "\n";
        }
     }
 }

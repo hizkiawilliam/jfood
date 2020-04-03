@@ -2,7 +2,7 @@
  * Write a description of class JFood here.
  *
  * @author Hizkia William Eben
- * @version 12.03.2020
+ * @version 03.04.2020
  */
 
 import java.util.*;
@@ -17,31 +17,86 @@ public class JFood
     public static void main(String[] args)
     {
         Location location1 = new Location("Depok", "Jawa Barat", "Universitas Indonesia");
-        DatabaseSeller.addSeller(new Seller(69, "Ruki R.", "ruki.r@ui.ac.id", "08229812470", location1));
+        DatabaseSeller.addSeller(new Seller(DatabaseSeller.getLastId()+1, "Ruki Harwahyu", "ruki.harwahyu@ui.ac.id", "08229812470", location1));
 
         Calendar calendar = new GregorianCalendar(2020, 4, 2);
-        DatabaseCustomer.addCustomer(new Customer(1, "Hizkia", "hizkia.william@gmail.com", "curuchuchu44",calendar));
-        DatabaseCustomer.addCustomer(new Customer(2, "Hizkia", "hizkia.william@gmail.com", "curuchuchu44", 2020, 4, 2));
-        DatabaseCustomer.addCustomer(new Customer(3, "Rama", "rama@ui.ac.id", "notPassword2"));
+        DatabaseCustomer.addCustomer(new Customer(DatabaseCustomer.getLastId()+1, "Hizkia", "hizkia.william@gmail.com", "curuChuchu44",calendar));
+        DatabaseCustomer.addCustomer(new Customer(DatabaseCustomer.getLastId()+1, "Hizkia", "hizkia.william@gmail.com", "curuChuchu44", 2020, 4, 2));
+        DatabaseCustomer.addCustomer(new Customer(DatabaseCustomer.getLastId()+1, "Ramadhan", "ramadhan@ui.ac.id", "notPassword2"));
 
         System.out.println("Daftar Customer: ");
         for (Customer customers : DatabaseCustomer.getCustomerDatabase())
         {
-            System.out.println(customers.getName());
+            System.out.println(customers);
         }
         System.out.println("\n");
 
-        DatabaseFood.addFood(new Food(1,"Fried Chicken", DatabaseSeller.getSellerById(DatabaseSeller.getLastId()), 16000, FoodCategory.Western));
-        DatabaseFood.addFood(new Food(2,"French Fries", DatabaseSeller.getSellerById(DatabaseSeller.getLastId()), 50000, FoodCategory.Western));
-        DatabaseFood.addFood(new Food(3,"Nasi Hainan", DatabaseSeller.getSellerById(DatabaseSeller.getLastId()), 100000, FoodCategory.Rice));
+        DatabaseFood.addFood(new Food(DatabaseFood.getLastId()+1,"Fried Chicken", DatabaseSeller.getSellerById(DatabaseSeller.getLastId()), 30000, FoodCategory.Western));
+        DatabaseFood.addFood(new Food(DatabaseFood.getLastId()+1,"French Fries", DatabaseSeller.getSellerById(DatabaseSeller.getLastId()), 25000, FoodCategory.Western));
+        DatabaseFood.addFood(new Food(DatabaseFood.getLastId()+1,"Nasi Hainan", DatabaseSeller.getSellerById(DatabaseSeller.getLastId()), 100000, FoodCategory.Rice));
 
         System.out.println("Daftar Food Category Western: ");
         for (Food food : DatabaseFood.getFoodByCategory(FoodCategory.Western))
         {
-            System.out.println(food.getName());
+            System.out.println(food);
+        }
+        DatabasePromo.addPromo(new Promo(DatabaseFood.getLastId()+1,"Mahasiswa",10000,20000,false));
+        DatabasePromo.addPromo(new Promo(DatabaseFood.getLastId()+1,"Mahasiswa",5000,10000,true));
+
+        System.out.println("Daftar Promo: ");
+        for (Promo promo : DatabasePromo.getPromoDatabase())
+        {
+            System.out.println(promo);
         }
 
-        DatabaseCustomer.getCustomerById(DatabaseCustomer.getLastId());
+        ArrayList<Food> newFood = new ArrayList<Food>();
+        newFood.add(DatabaseFood.getFoodById(DatabaseFood.getLastId()));
+
+        DatabaseInvoice.addInvoice(new CashInvoice(DatabaseInvoice.getLastId()+1,newFood,DatabaseCustomer.getCustomerById(1),5000));
+        DatabaseInvoice.getInvoiceById(DatabaseInvoice.getLastId()).setTotalPrice();
+
+        for (Invoice invoice : DatabaseInvoice.getInvoiceByCustomer(1))
+        {
+            invoice.setTotalPrice();
+        }
+
+        DatabaseInvoice.addInvoice(new CashlessInvoice(DatabaseInvoice.getLastId()+1,newFood,DatabaseCustomer.getCustomerById(1),DatabasePromo.getPromoByCode("Mahasiswa")));
+
+        for (Invoice invoice : DatabaseInvoice.getInvoiceByCustomer(1))
+        {
+            invoice.setTotalPrice();
+        }
+
+        System.out.println("Daftar Invoice: ");
+        for (Invoice invoice : DatabaseInvoice.getInvoiceDatabase())
+        {
+            System.out.println(invoice);
+        }
+
+        for (Invoice invoice : DatabaseInvoice.getInvoiceByCustomer(1))
+        {
+            invoice.setInvoiceStatus(InvoiceStatus.Finished);
+        }
+
+        DatabaseInvoice.addInvoice(new CashlessInvoice(DatabaseInvoice.getLastId()+1,newFood,DatabaseCustomer.getCustomerById(2),DatabasePromo.getPromoByCode("Mahasiswa")));
+
+        for (Promo promo : DatabasePromo.getPromoDatabase())
+        {
+            promo.setActive(true);
+        }
+
+        for (Invoice invoice : DatabaseInvoice.getInvoiceDatabase())
+        {
+            invoice.setTotalPrice();
+        }
+
+        System.out.println("Daftar Invoice: ");
+        for (Invoice invoice : DatabaseInvoice.getInvoiceDatabase())
+        {
+            System.out.println(invoice);
+        }
+
+        //DatabaseCustomer.getCustomerById(DatabaseCustomer.getLastId());
         /*
         Seller seller1 = new Seller(42806,"Hizkia William Eben","williamhizkia@gmail.com","082298840430",location1);
         Food food1 = new Food(1001,"White Coffee",seller1,25000,FoodCategory.Coffee);

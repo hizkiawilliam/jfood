@@ -3,7 +3,7 @@
  * Write a description of class CashlessInvoice here.
  *
  * @author Hizkia William Eben
- * @version 12.03.2020
+ * @version 03.04.2020
  */
 
 import java.util.*;

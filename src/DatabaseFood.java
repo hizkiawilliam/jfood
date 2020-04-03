@@ -3,7 +3,7 @@
  * Write a description of class DatabaseFood here.
  *
  * @author Hizkia William Eben
- * @version 12.03.2020
+ * @version 03.04.2020
  */
 
 import jdk.jfr.Category;
@@ -80,15 +80,20 @@ public class DatabaseFood
      */
     public static ArrayList<Food> getFoodByCategory(FoodCategory category)
     {
-        ArrayList<Food> category_foods = new ArrayList<>();
-        for(Food food:FOOD_DATABASE)
-        {
+        ArrayList<Food> categoryFoods = new ArrayList<>();
+        for(Food food:FOOD_DATABASE) {
             if (category == food.getCategory())
             {
-                category_foods.add(food);
+                categoryFoods.add(food);
             }
         }
-        return category_foods;
+        if (categoryFoods == null)
+        {
+            return null;
+        } else
+            {
+            return categoryFoods;
+        }
     }
 
     /**
@@ -97,6 +102,13 @@ public class DatabaseFood
     */
     public static boolean addFood(Food food)
     {
+        for(Food foodCheck:FOOD_DATABASE)
+        {
+            if (foodCheck.getId() == food.getId())
+            {
+                return false;
+            }
+        }
         FOOD_DATABASE.add(food);
         lastId = food.getId();
         return true;

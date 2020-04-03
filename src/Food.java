@@ -2,7 +2,7 @@
  * Class Food is class that stores information for every food object
  *
  * @author Hizkia William Eben
- * @version 20.03.2020
+ * @version 03.04.2020
  */
 public class Food
 {
@@ -70,11 +70,12 @@ public class Food
     */    
     public String toString()
     {
-         return "Id = " + getId() + 
-                "Name = " + getName() + 
-                "Seller = " + getSeller().getName() + 
-                "City =" + seller.getLocation().getCity() + 
-                "Price = " + getPrice() + 
-                "Category = " + getCategory().toString();
+         return "==========FOOD==========" +
+                "\nId = " + getId() +
+                "\nName = " + getName() +
+                "\nSeller = " + getSeller().getName() +
+                "\nCity = " + seller.getLocation().getCity() +
+                "\nPrice = " + getPrice() +
+                "\nCategory = " + getCategory().toString() + "\n";
     }
 }

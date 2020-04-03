@@ -3,7 +3,7 @@
  * Enumeration class PaymentType - write a description of the enum class here
  *
  * @author Hizkia William Eben
- * @version 12.03.2020
+ * @version 03.04.2020
  */
 public enum PaymentType
 {
