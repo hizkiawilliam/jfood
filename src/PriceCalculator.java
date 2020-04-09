@@ -13,6 +13,6 @@ public class PriceCalculator implements Runnable
         System.out.println("Calculating invoice id: " + invoice.getId());
         invoice.setTotalPrice();
         System.out.println("finish calculating invoice id: " + invoice.getId());
-        System.out.println("Total Price: " + invoice.getId() + " " + invoice.getTotalPrice());
+        System.out.println("Total Price invoice id " + invoice.getId() + ": " + invoice.getTotalPrice());
     }
 }
