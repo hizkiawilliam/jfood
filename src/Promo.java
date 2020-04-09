@@ -25,7 +25,7 @@ public class Promo
         this.minPrice = minPrice;
         this.active = active;
     }
-    
+
     public int getId()
     {
         return id;
@@ -72,10 +72,10 @@ public class Promo
     public String toString()
     {
          return  "==========Promo==========" +
-                 "\nId = " + getId() +
-                 "\nCode = " + getCode() +
-                 "\nDiscount = " + getDiscount() +
-                 "\nMin Price " + getDiscount() +
-                 "\nActive Status" + getActive();
+                 "\nId: " + getId() +
+                 "\nCode: " + getCode() +
+                 "\nDiscount: " + getDiscount() +
+                 "\nMin Price: " + getMinPrice() +
+                 "\nActive Status: " + getActive() + "\n";
     }
 }

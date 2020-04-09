@@ -52,7 +52,7 @@ public class DatabaseSeller
     * Method to remove seller
     * @return false default return param for boolean
     */
-    public static boolean removeSeller(int id)
+    public static boolean removeSeller(int id) throws SellerNotFoundException
     {
         for(int i = 0;  i < SELLER_DATABASE.size(); i++)
         {
@@ -62,14 +62,14 @@ public class DatabaseSeller
                 SELLER_DATABASE.remove(id);
             }
         }
-        return true;
+        throw new SellerNotFoundException(id);
     }
     
     /**
     * Method to show seller
     * @return Seller with specific id
     */
-    public static Seller getSellerById(int id)
+    public static Seller getSellerById(int id) throws SellerNotFoundException
     {
         for(Seller sellers:SELLER_DATABASE)
         {
@@ -78,7 +78,7 @@ public class DatabaseSeller
                 return sellers;
             }
         }
-        return null;
+        throw new SellerNotFoundException(id);
     }
 
     /**

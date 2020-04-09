@@ -77,7 +77,7 @@ public class DatabaseInvoice
     {
         for(Invoice invoiceCheck:INVOICE_DATABASE)
         {
-            if (invoiceCheck.getInvoiceStatus() == InvoiceStatus.Ongoing)
+            if (invoiceCheck.getCustomer() == invoice.getCustomer() && invoiceCheck.getInvoiceStatus() == InvoiceStatus.Ongoing)
             {
                 return false;
             }

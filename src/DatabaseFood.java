@@ -45,7 +45,7 @@ public class DatabaseFood
      * Method to show food by id
      * @return food
      */
-    public static Food getFoodById(int id)
+    public static Food getFoodById(int id) throws FoodNotFoundException
     {
         for(Food foods:FOOD_DATABASE)
         {
@@ -54,7 +54,7 @@ public class DatabaseFood
                 return foods;
             }
         }
-        return null;
+        throw new FoodNotFoundException(id);
     }
 
     /**
@@ -118,7 +118,7 @@ public class DatabaseFood
     * Method to remove food
     * @return false default return param to check successability
     */
-    public static boolean removeFood(int id)
+    public static boolean removeFood(int id) throws FoodNotFoundException
     {
         for(int i = 0;  i < FOOD_DATABASE.size(); i++)
         {
@@ -126,8 +126,9 @@ public class DatabaseFood
             if (id == food.getId())
             {
                 FOOD_DATABASE.remove(id);
+                return true;
             }
         }
-        return true;
+        throw new FoodNotFoundException(id);
     }
 }

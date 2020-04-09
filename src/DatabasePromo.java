@@ -35,7 +35,7 @@ public class DatabasePromo
      * Method to show promo by id
      * @return promo
      */
-    public static Promo getPromoById(int id)
+    public static Promo getPromoById(int id) throws PromoNotFoundException
     {
         for(Promo promo:PROMO_DATABASE)
         {
@@ -44,7 +44,7 @@ public class DatabasePromo
                 return promo;
             }
         }
-        return null;
+        throw new PromoNotFoundException(id);
     }
 
     /**
@@ -67,13 +67,13 @@ public class DatabasePromo
      * Method to add promo
      * @return false default return param to check successability
      */
-    public static boolean addPromo(Promo promo)
+    public static boolean addPromo(Promo promo) throws PromoCodeAlreadyExistsException
     {
         for(Promo promoCheck:PROMO_DATABASE)
         {
             if (promoCheck.getCode() == promo.getCode())
             {
-                return false;
+                throw new PromoCodeAlreadyExistsException(promo);
             }
         }
         PROMO_DATABASE.add(promo);
@@ -119,7 +119,7 @@ public class DatabasePromo
      * Method to remove promo
      * @return false default return param to check successability
      */
-    public static boolean removePromo(int id)
+    public static boolean removePromo(int id) throws PromoNotFoundException
     {
         for(int i = 0;  i < PROMO_DATABASE.size(); i++)
         {
@@ -130,6 +130,6 @@ public class DatabasePromo
                 return true;
             }
         }
-        return false;
+        throw new PromoNotFoundException(id);
     }
 }

@@ -5,6 +5,8 @@
  * @version 03.04.2020
  */
 
+import kotlin.time.FormatToDecimalsKt;
+
 import java.util.*;
 
 public class JFood
@@ -18,78 +20,271 @@ public class JFood
     {
         Location location1 = new Location("Depok", "Jawa Barat", "Universitas Indonesia");
         DatabaseSeller.addSeller(new Seller(DatabaseSeller.getLastId()+1, "Ruki Harwahyu", "ruki.harwahyu@ui.ac.id", "08229812470", location1));
-
         Calendar calendar = new GregorianCalendar(2020, 4, 2);
-        DatabaseCustomer.addCustomer(new Customer(DatabaseCustomer.getLastId()+1, "Hizkia", "hizkia.william@gmail.com", "curuChuchu44",calendar));
-        DatabaseCustomer.addCustomer(new Customer(DatabaseCustomer.getLastId()+1, "Hizkia", "hizkia.william@gmail.com", "curuChuchu44", 2020, 4, 2));
-        DatabaseCustomer.addCustomer(new Customer(DatabaseCustomer.getLastId()+1, "Ramadhan", "ramadhan@ui.ac.id", "notPassword2"));
 
+        //==============================
+        //===========Tugas 8============
+        //==============================
+
+        //=================Error Handling Customer Email================
+        try {
+            DatabaseCustomer.addCustomer(new Customer(DatabaseCustomer.getLastId()+1, "Ramadhan", "ramadhan@ui.ac.id", "notPassword2"));
+        }
+        catch (EmailAlreadyExistsException e){
+            System.out.println(e.getMessage());
+        }
+
+        try {
+            DatabaseCustomer.addCustomer(new Customer(DatabaseCustomer.getLastId()+1, "Ridho", "ridhogani@ui.ac.id", "YeahBoi27"));
+        }
+        catch (EmailAlreadyExistsException e){
+            System.out.println(e.getMessage());
+        }
+
+        try {
+            DatabaseCustomer.addCustomer(new Customer(DatabaseCustomer.getLastId()+1, "Hizkia", "hizkia.william@gmail.com", "curuChuchu44",calendar));
+        }
+        catch (EmailAlreadyExistsException e){
+            System.out.println(e.getMessage());
+        }
+
+        try {
+            DatabaseCustomer.addCustomer(new Customer(DatabaseCustomer.getLastId()+1, "Hizkia", "hizkia.william@gmail.com", "curuChuchu44", 2020, 4, 2));
+        }
+        catch (EmailAlreadyExistsException e){
+            System.out.println(e.getMessage());
+        }
+
+        //=================Error Handling Promo Exists================
+        try{
+            DatabasePromo.addPromo(new Promo(DatabasePromo.getLastId()+1,"Mahasiswa",5000,20000,false));
+        }
+        catch (PromoCodeAlreadyExistsException e){
+            System.out.println(e.getMessage());
+        }
+
+        try{
+            DatabasePromo.addPromo(new Promo(DatabasePromo.getLastId()+1,"Mahasiswa",5000,20000,true));
+        }
+        catch (PromoCodeAlreadyExistsException e){
+            System.out.println(e.getMessage());
+        }
+
+        //=================Error Handling Customer Id================
+        try{
+            DatabaseCustomer.removeCustomer(4);
+        }
+        catch (CustomerNotFoundException e){
+            System.out.println(e.getMessage());
+        }
+
+        //=================Error Handling Food Id================
+        try{
+            DatabaseFood.removeFood(4);
+        }
+        catch (FoodNotFoundException e){
+            System.out.println(e.getMessage());
+        }
+
+        //=================Error Handling Seller Id================
+        try {
+            DatabaseSeller.getSellerById(3);
+        }
+        catch (SellerNotFoundException e){
+            System.out.println(e.getMessage());
+        }
+
+        //=================Error Handling Promo Id================
+        try{
+            DatabasePromo.removePromo(3);
+        }
+        catch (PromoNotFoundException e){
+            System.out.println(e.getMessage());
+        }
+
+        //======================Add food========================
+        try{
+            DatabaseFood.addFood(new Food(DatabaseFood.getLastId()+1,"Fried Chicken", DatabaseSeller.getSellerById(DatabaseSeller.getLastId()), 28000, FoodCategory.Western));
+        }
+        catch (SellerNotFoundException e){
+            System.out.println(e.getMessage());
+        }
+
+        try{
+            DatabaseFood.addFood(new Food(DatabaseFood.getLastId()+1,"French Fries", DatabaseSeller.getSellerById(DatabaseSeller.getLastId()), 25000, FoodCategory.Western));
+        }
+        catch (SellerNotFoundException e){
+            System.out.println(e.getMessage());
+        }
+
+        try{
+            DatabaseFood.addFood(new Food(DatabaseFood.getLastId()+1,"Nasi Hainan", DatabaseSeller.getSellerById(DatabaseSeller.getLastId()), 27000, FoodCategory.Rice));
+        }
+        catch (SellerNotFoundException e){
+            System.out.println(e.getMessage());
+        }
+
+
+        //=================Print Yang Masuk Ke Database================
+        System.out.println("\n");
+        System.out.println("==========YANG MASUK DATABASE CUSTOMER===========");
+        for (Customer customers : DatabaseCustomer.getCustomerDatabase())
+        {
+            System.out.println(customers);
+        }
+
+        System.out.println("===========YANG MASUK DATABASE PROMO===========");
+        for (Promo promo : DatabasePromo.getPromoDatabase())
+        {
+            System.out.println(promo);
+        }
+
+        System.out.println("===========YANG MASUK DATABASE FOOD===========");
+        for (Food food : DatabaseFood.getFoodDatabase())
+        {
+            System.out.println(food);
+        }
+
+        //==============================
+        //===========Tugas 9============
+        //==============================
+
+        //========================Add Array list Food============================
+        ArrayList<Food> newFood = new ArrayList<Food>();
+        ArrayList<Food> newFood2 = new ArrayList<Food>();
+        ArrayList<Food> newFood3 = new ArrayList<Food>();
+
+        try {
+            newFood.add(DatabaseFood.getFoodById(1));
+        }
+        catch(FoodNotFoundException e){
+            System.out.println(e.getMessage());
+        }
+
+        try {
+            newFood2.add(DatabaseFood.getFoodById(1));
+        }
+        catch (FoodNotFoundException e){
+            System.out.println(e.getMessage());
+        }
+
+        try {
+            newFood2.add(DatabaseFood.getFoodById(2));
+        }
+        catch (FoodNotFoundException e){
+            System.out.println(e.getMessage());
+        }
+
+        try {
+            newFood3.add(DatabaseFood.getFoodById(3));
+        }
+        catch (FoodNotFoundException e){
+            System.out.println(e.getMessage());
+        }
+
+        //========================Add Invoice============================
+        try {
+            DatabaseInvoice.addInvoice(new CashInvoice(DatabaseInvoice.getLastId() + 1, newFood, DatabaseCustomer.getCustomerById(1), 5000));
+        }
+        catch(CustomerNotFoundException e){
+            System.out.println(e.getMessage());
+        }
+
+        try {
+            DatabaseInvoice.addInvoice(new CashInvoice(DatabaseInvoice.getLastId() + 1, newFood2, DatabaseCustomer.getCustomerById(2), 6000));
+        }
+        catch(CustomerNotFoundException e){
+            System.out.println(e.getMessage());
+        }
+
+        try {
+            DatabaseInvoice.addInvoice(new CashInvoice(DatabaseInvoice.getLastId() + 1, newFood3, DatabaseCustomer.getCustomerById(3), 7000));
+        }
+        catch(CustomerNotFoundException e){
+            System.out.println(e.getMessage());
+        }
+
+        //========================Kalkulasi Invoice============================
+        for (Invoice invoice : DatabaseInvoice.getInvoiceDatabase())
+        {
+            Thread calculate = new Thread(new PriceCalculator(invoice));
+            calculate.start();
+        }
+
+
+        /*
         System.out.println("Daftar Customer: ");
         for (Customer customers : DatabaseCustomer.getCustomerDatabase())
         {
             System.out.println(customers);
         }
         System.out.println("\n");
+         */
 
-        DatabaseFood.addFood(new Food(DatabaseFood.getLastId()+1,"Fried Chicken", DatabaseSeller.getSellerById(DatabaseSeller.getLastId()), 30000, FoodCategory.Western));
-        DatabaseFood.addFood(new Food(DatabaseFood.getLastId()+1,"French Fries", DatabaseSeller.getSellerById(DatabaseSeller.getLastId()), 25000, FoodCategory.Western));
-        DatabaseFood.addFood(new Food(DatabaseFood.getLastId()+1,"Nasi Hainan", DatabaseSeller.getSellerById(DatabaseSeller.getLastId()), 100000, FoodCategory.Rice));
-
+        /*
         System.out.println("Daftar Food Category Western: ");
         for (Food food : DatabaseFood.getFoodByCategory(FoodCategory.Western))
         {
             System.out.println(food);
         }
-        DatabasePromo.addPromo(new Promo(DatabaseFood.getLastId()+1,"Mahasiswa",10000,20000,false));
-        DatabasePromo.addPromo(new Promo(DatabaseFood.getLastId()+1,"Mahasiswa",5000,10000,true));
+         */
 
+        /* Modul 6
+        //Nomor 1
+        DatabasePromo.addPromo(new Promo(DatabasePromo.getLastId()+1,"Mahasiswa",5000,20000,false));
+//        DatabasePromo.addPromo(new Promo(DatabaseFood.getLastId()+1,"Mahasiswa",5000,10000,true));
+
+        //Nomor 2
         System.out.println("Daftar Promo: ");
         for (Promo promo : DatabasePromo.getPromoDatabase())
         {
             System.out.println(promo);
         }
 
+        //Nomor 3
         ArrayList<Food> newFood = new ArrayList<Food>();
-        newFood.add(DatabaseFood.getFoodById(DatabaseFood.getLastId()));
+        newFood.add(DatabaseFood.getFoodById(1));
 
+        ArrayList<Food> newFood2 = new ArrayList<Food>();
+        newFood2.add(DatabaseFood.getFoodById(1));
+        newFood2.add(DatabaseFood.getFoodById(2));
+
+        //Nomor 4
         DatabaseInvoice.addInvoice(new CashInvoice(DatabaseInvoice.getLastId()+1,newFood,DatabaseCustomer.getCustomerById(1),5000));
-        DatabaseInvoice.getInvoiceById(DatabaseInvoice.getLastId()).setTotalPrice();
 
-        for (Invoice invoice : DatabaseInvoice.getInvoiceByCustomer(1))
-        {
-            invoice.setTotalPrice();
-        }
+        //Nomor 5
+        DatabaseInvoice.getInvoiceByCustomer(1).get(DatabaseInvoice.getInvoiceByCustomer(1).size()-1).setTotalPrice();
+        DatabaseInvoice.getInvoiceByCustomer(1).get(DatabaseInvoice.getInvoiceByCustomer(1).size()-1).setInvoiceStatus(InvoiceStatus.Finished);
 
-        DatabaseInvoice.addInvoice(new CashlessInvoice(DatabaseInvoice.getLastId()+1,newFood,DatabaseCustomer.getCustomerById(1),DatabasePromo.getPromoByCode("Mahasiswa")));
+        //Nomor 6
+        DatabaseInvoice.addInvoice(new CashlessInvoice(DatabaseInvoice.getLastId()+1,newFood2,DatabaseCustomer.getCustomerById(1),DatabasePromo.getPromoByCode("Mahasiswa")));
 
-        for (Invoice invoice : DatabaseInvoice.getInvoiceByCustomer(1))
-        {
-            invoice.setTotalPrice();
-        }
+        //Nomor 7
+        DatabaseInvoice.getInvoiceByCustomer(1).get(DatabaseInvoice.getInvoiceByCustomer(1).size()-1).setTotalPrice();
 
+        //Nomor 8
         System.out.println("Daftar Invoice: ");
         for (Invoice invoice : DatabaseInvoice.getInvoiceDatabase())
         {
             System.out.println(invoice);
         }
 
-        for (Invoice invoice : DatabaseInvoice.getInvoiceByCustomer(1))
-        {
-            invoice.setInvoiceStatus(InvoiceStatus.Finished);
-        }
+        //Nomor 9
+        DatabaseInvoice.getInvoiceByCustomer(1).get(DatabaseInvoice.getInvoiceByCustomer(1).size()-1).setInvoiceStatus(InvoiceStatus.Finished);
 
-        DatabaseInvoice.addInvoice(new CashlessInvoice(DatabaseInvoice.getLastId()+1,newFood,DatabaseCustomer.getCustomerById(2),DatabasePromo.getPromoByCode("Mahasiswa")));
+        //Nomor 10
+        DatabaseInvoice.addInvoice(new CashlessInvoice(DatabaseInvoice.getLastId()+1,newFood2,DatabaseCustomer.getCustomerById(2),DatabasePromo.getPromoByCode("Mahasiswa")));
 
+        //Nomor 11
         for (Promo promo : DatabasePromo.getPromoDatabase())
         {
             promo.setActive(true);
         }
 
-        for (Invoice invoice : DatabaseInvoice.getInvoiceDatabase())
-        {
-            invoice.setTotalPrice();
-        }
+        //Nomor 12
+        DatabaseInvoice.getInvoiceByCustomer(2).get(DatabaseInvoice.getInvoiceByCustomer(2).size()-1).setTotalPrice();
 
+        //Nomor 13
         System.out.println("Daftar Invoice: ");
         for (Invoice invoice : DatabaseInvoice.getInvoiceDatabase())
         {

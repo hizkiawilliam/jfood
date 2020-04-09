@@ -47,6 +47,7 @@ public class CashInvoice extends Invoice
     
     public void setTotalPrice()
     {
+        super.totalPrice = 0;
         if(deliveryFee > 0)
         {
             for(Food foods:getFoods()) {
@@ -71,7 +72,7 @@ public class CashInvoice extends Invoice
         }
         SimpleDateFormat format1 = new SimpleDateFormat("dd MMMM yyyy");
         String date = format1.format(getDate().getTime());
-        return "\n================Invoice================" + "\n" +
+        return "================Invoice================" + "\n" +
                 "ID: " + getId() + "\n" +
                 "Name: " + foodName + "\n" +
                 "Date: " + date + "\n" +
@@ -80,20 +81,5 @@ public class CashInvoice extends Invoice
                 "Total Price: " + totalPrice + "\n" +
                 "Status: " + getInvoiceStatus() + "\n" +
                 "Payment Type: " + getPaymentType() + "\n";
-        /*
-        SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy");
-        String string = "";
-        string = "===============Invoice===============" +
-               "\nID: " + super.getId() +
-               "\nFood: " + super.getFoods().getName() +
-               "\nDate: " + sdf.format(super.getDate().getTime()) +
-               "\nCustomer: " + super.getCustomer().getName() +
-               "\nDelivery Fee: " + getDeliveryFee() +
-               "\nTotalPrice: " + super.getTotalPrice() +
-               "\nStatus: " + super.getInvoiceStatus() +
-               "\nPayment Type: " + getPaymentType();
-        return string;
-
-         */
     }
 }
