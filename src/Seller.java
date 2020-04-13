@@ -2,8 +2,9 @@
  * Class Seller is class that stores information for every seller object
  *
  * @author Hizkia William Eben
- * @version 03.04.2020
+ * @version 13.04.2020
  */
+
 public class Seller
 {
 
@@ -31,94 +32,98 @@ public class Seller
     }
     
     /**
-    * Method as accessor to get id
-    * @return id
-    */
+     * Method as accessor to get id of the seller
+     * @return id of the seller
+     */
     public int getId()
     {
         return id;
     }
     
     /**
-    * Method as accessor to get name
-    * @return name
-    */
+     * Method as accessor to get name of the seller
+     * @return name of the seller
+     */
     public String getName()
     {
         return name;
     }
     
     /**
-    * Method as accessor to get email
-    * @return email
-    */
+     * Method as accessor to get email of the seller
+     * @return email of the seller
+     */
     public String getEmail()
     {
         return email;
     }
     
     /**
-    * Method as accessor to get phone number
-    * @return phoneNumber
-    */
+     * Method as accessor to get phone number of the seller
+     * @return phoneNumber of the seller
+     */
     public String getPhoneNumber()
     {
         return phoneNumber;
     }
     
     /**
-    * Method as accessor to get location
-    * @return location
-    */
+     * Method as accessor to get location of the seller
+     * @return location of the seller
+     */
     public Location getLocation()
     {
         return location;
     }
     
     /**
-    * Method as setter to set id
-    */
+     * Method as setter to set id of the seller
+     * @param id variable that stores information of seller id
+     */
     public void setId(int id)
     {
         this.id = id;
     }
     
     /**
-    * Method as setter to set name
-    */
+     * Method as setter to set name of the seller
+     * @param name variable that stores information of seller name
+     */
     public void setName(String name)
     {
         this.name = name;
     }
     
     /**
-    * Method as setter to set email
-    */
+     * Method as setter to set email of the seller
+     * @param email variable that stores information of seller email
+     */
     public void setEmail(String email)
     {
         this.email = email;
     }
     
     /**
-    * Method as setter to set phone number
-    */
+     * Method as setter to set phone number of the seller
+     * @param phoneNumber variable that stores information of seller phone number
+     */
     public void setPhoneNumber(String phoneNumber)
     {
         this.phoneNumber = phoneNumber;
     }
     
     /**
-    * Method as accessor to set location
-    * @return location
-    */
+     * Method as accessor to set location of the seller
+     * @param location variable that stores information of seller location
+     */
     public void setLocation(Location location)
     {
         this.location = location;
     }
     
     /**
-    * Method to return all variables Seller as String
-    */    
+     * Method to return all variables Seller as String
+     */
     public String toString()
     {
          return "Id = " + getId() + 

@@ -117,6 +117,7 @@ public class Customer
                 
     /**
     * Method as setter or mutator to set or change id of customer
+    * @param id variable that stores information about id of the customer
     */
     public void setId(int id)
     {
@@ -125,6 +126,7 @@ public class Customer
                 
     /**
     * Method as setter or mutator to set or change name of customer
+    * @param name variable that stores information about name of the customer
     */
     public void setName(String name)
     {
@@ -133,6 +135,7 @@ public class Customer
                 
     /**
     * Method as setter or mutator to set or change email of customer with regex checking
+    * @param email variable that stores information about email of the customer
     */
     public void setEmail(String email)
     {
@@ -151,6 +154,7 @@ public class Customer
                 
     /**
     * Method as setter or mutator to set or change password of customer with regex checking
+    * @param password variable that stores information about name of the customer
     */
     public void setPassword(String password)
     {
@@ -169,6 +173,7 @@ public class Customer
             
     /**
     * Method as setter or mutator to set or change join date of customer
+    * @param joinDate variable that stores information about join date of the customer
     */
     public void setJoinDate(Calendar joinDate)
     {
@@ -177,15 +182,18 @@ public class Customer
             
     /**
     * Method as setter or mutator to set or change join date of customer with specific param
+    * @param year variable that stores information about join year of the customer
+    * @param month variable that stores information about join month of the customer
+    * @param dayOfMonth variable that stores information about join date of the customer
     */
     public void setJoinDate(int year, int month, int dayOfMonth)
     {
        this.joinDate = new GregorianCalendar(year, month, dayOfMonth);
     }
-            
+
     /**
-    * Method to return all variables of Customer as String
-    */    
+     * Method to print data of the customer
+     */
     public String toString()
     {  
        SimpleDateFormat sdf = new SimpleDateFormat("dd MMMM yyyy");

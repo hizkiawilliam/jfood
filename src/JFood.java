@@ -2,12 +2,13 @@
  * Write a description of class JFood here.
  *
  * @author Hizkia William Eben
- * @version 03.04.2020
+ * @version 13.04.2020
  */
 
 import kotlin.time.FormatToDecimalsKt;
 
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 public class JFood
 {
@@ -16,8 +17,7 @@ public class JFood
      * Constructor for objects of class JFood
      * Defined as main program
      */
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) throws InterruptedException {
         Location location1 = new Location("Depok", "Jawa Barat", "Universitas Indonesia");
         DatabaseSeller.addSeller(new Seller(DatabaseSeller.getLastId()+1, "Ruki Harwahyu", "ruki.harwahyu@ui.ac.id", "08229812470", location1));
         Calendar calendar = new GregorianCalendar(2020, 4, 2);
@@ -52,7 +52,7 @@ public class JFood
             DatabaseCustomer.addCustomer(new Customer(DatabaseCustomer.getLastId()+1, "Hizkia", "hizkia.william@gmail.com", "curuChuchu44", 2020, 4, 2));
         }
         catch (EmailAlreadyExistsException e){
-            System.out.println(e.getMessage());
+//            System.out.println(e.getMessage());
         }
 
         //=================Error Handling Promo Exists================
@@ -67,7 +67,7 @@ public class JFood
             DatabasePromo.addPromo(new Promo(DatabasePromo.getLastId()+1,"Mahasiswa",5000,20000,true));
         }
         catch (PromoCodeAlreadyExistsException e){
-            System.out.println(e.getMessage());
+//            System.out.println(e.getMessage());
         }
 
         //=================Error Handling Customer Id================
@@ -75,7 +75,7 @@ public class JFood
             DatabaseCustomer.removeCustomer(4);
         }
         catch (CustomerNotFoundException e){
-            System.out.println(e.getMessage());
+//            System.out.println(e.getMessage());
         }
 
         //=================Error Handling Food Id================
@@ -83,7 +83,7 @@ public class JFood
             DatabaseFood.removeFood(4);
         }
         catch (FoodNotFoundException e){
-            System.out.println(e.getMessage());
+//            System.out.println(e.getMessage());
         }
 
         //=================Error Handling Seller Id================
@@ -91,7 +91,7 @@ public class JFood
             DatabaseSeller.getSellerById(3);
         }
         catch (SellerNotFoundException e){
-            System.out.println(e.getMessage());
+//            System.out.println(e.getMessage());
         }
 
         //=================Error Handling Promo Id================
@@ -99,7 +99,7 @@ public class JFood
             DatabasePromo.removePromo(3);
         }
         catch (PromoNotFoundException e){
-            System.out.println(e.getMessage());
+//            System.out.println(e.getMessage());
         }
 
         //======================Add food========================
@@ -122,27 +122,6 @@ public class JFood
         }
         catch (SellerNotFoundException e){
             System.out.println(e.getMessage());
-        }
-
-
-        //=================Print Yang Masuk Ke Database================
-        System.out.println("\n");
-        System.out.println("==========YANG MASUK DATABASE CUSTOMER===========");
-        for (Customer customers : DatabaseCustomer.getCustomerDatabase())
-        {
-            System.out.println(customers);
-        }
-
-        System.out.println("===========YANG MASUK DATABASE PROMO===========");
-        for (Promo promo : DatabasePromo.getPromoDatabase())
-        {
-            System.out.println(promo);
-        }
-
-        System.out.println("===========YANG MASUK DATABASE FOOD===========");
-        for (Food food : DatabaseFood.getFoodDatabase())
-        {
-            System.out.println(food);
         }
 
         //==============================
@@ -179,37 +158,104 @@ public class JFood
             newFood3.add(DatabaseFood.getFoodById(3));
         }
         catch (FoodNotFoundException e){
-            System.out.println(e.getMessage());
+//            System.out.println(e.getMessage());
         }
+
+        //===============================================================
+        //=====================POST TEST MODUL 7=========================
+        //===============================================================
 
         //========================Add Invoice============================
+        //add invoice yang berhasil
         try {
-            DatabaseInvoice.addInvoice(new CashInvoice(DatabaseInvoice.getLastId() + 1, newFood, DatabaseCustomer.getCustomerById(1), 5000));
+            try {
+                DatabaseInvoice.addInvoice(new CashInvoice(DatabaseInvoice.getLastId() + 1, newFood, DatabaseCustomer.getCustomerById(1), 5000));
+            }
+            catch(CustomerNotFoundException e){
+                System.out.println(e.getMessage());
+            }
         }
-        catch(CustomerNotFoundException e){
+        catch(OngoingInvoiceAlreadyExistsException e){
             System.out.println(e.getMessage());
         }
 
+        //get invoice yang gagal
         try {
-            DatabaseInvoice.addInvoice(new CashInvoice(DatabaseInvoice.getLastId() + 1, newFood2, DatabaseCustomer.getCustomerById(2), 6000));
+            try {
+                DatabaseInvoice.addInvoice(new CashInvoice(DatabaseInvoice.getLastId() + 1, newFood2, DatabaseCustomer.getCustomerById(1), 7000));
+            }
+            catch(CustomerNotFoundException e){
+                System.out.println(e.getMessage());
+            }
         }
-        catch(CustomerNotFoundException e){
+        catch(OngoingInvoiceAlreadyExistsException e){
             System.out.println(e.getMessage());
         }
 
-        try {
-            DatabaseInvoice.addInvoice(new CashInvoice(DatabaseInvoice.getLastId() + 1, newFood3, DatabaseCustomer.getCustomerById(3), 7000));
+        for (Invoice invoice : DatabaseInvoice.getInvoiceDatabase()) {
+            invoice.setTotalPrice();
         }
-        catch(CustomerNotFoundException e){
+        //get invoice yang berhasil
+        try {
+            System.out.println(DatabaseInvoice.getInvoiceById(1));
+        }
+        catch(InvoiceNotFoundException e){
             System.out.println(e.getMessage());
+        }
+
+        //get invoice yang gagal
+        try {
+            System.out.println(DatabaseInvoice.getInvoiceById(5));
+        }
+        catch(InvoiceNotFoundException e){
+            System.out.println(e.getMessage());
+        }
+
+        //=================Print Yang Masuk Ke Database================
+        System.out.println("\n");
+        System.out.println("==========YANG MASUK DATABASE CUSTOMER===========");
+        for (Customer customers : DatabaseCustomer.getCustomerDatabase())
+        {
+            System.out.println(customers);
+        }
+
+        System.out.println("===========YANG MASUK DATABASE PROMO===========");
+        for (Promo promo : DatabasePromo.getPromoDatabase())
+        {
+            System.out.println(promo);
+        }
+
+        System.out.println("===========YANG MASUK DATABASE FOOD===========");
+        for (Food food : DatabaseFood.getFoodDatabase())
+        {
+            System.out.println(food);
+        }
+
+        System.out.println("===========YANG MASUK DATABASE INVOICE===========");
+        for (Invoice invoice : DatabaseInvoice.getInvoiceDatabase())
+        {
+            System.out.println(invoice);
         }
 
         //========================Kalkulasi Invoice============================
-        for (Invoice invoice : DatabaseInvoice.getInvoiceDatabase())
-        {
-            Thread calculate = new Thread(new PriceCalculator(invoice));
-            calculate.start();
-        }
+//        for (Invoice invoice : DatabaseInvoice.getInvoiceDatabase()) {
+//            Thread calculate = new Thread(new PriceCalculator(invoice));
+//            calculate.start();
+//            while(true){
+//                if(!calculate.isAlive())
+//                {
+//                    break;
+//                }
+//            }
+//        }
+//        TimeUnit.SECONDS.sleep(1);
+
+        //========================List Invoice============================
+        //for (Invoice invoice : DatabaseInvoice.getInvoiceDatabase()) {
+        //    System.out.println(invoice);
+        //}
+
+
 
 
         /*

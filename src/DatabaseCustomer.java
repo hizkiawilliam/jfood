@@ -4,11 +4,10 @@ import java.util.ArrayList;
  * Write a description of class DatabaseCustomer here.
  *
  * @author Hizkia William Eben
- * @version 03.04.2020
+ * @version 13.04.2020
  */
 public class DatabaseCustomer
 {
-    // instance variables - replace the example below with your own
     private static ArrayList<Customer> CUSTOMER_DATABASE = new ArrayList<Customer>();
     private static int lastId = 0;
 
@@ -20,8 +19,8 @@ public class DatabaseCustomer
     }
 
     /**
-     * Method to show customer database
-     * @return customer database
+     * Method to show all customer inside customer database
+     * @return CUSTOMER_DATABASE array list that contain all customer information
      */
     public static ArrayList<Customer> getCustomerDatabase()
     {
@@ -29,7 +28,7 @@ public class DatabaseCustomer
     }
 
     /**
-     * Method to show last id
+     * Method to show last id of the object in the customer database
      * @return last id in database
      */
     public static int getLastId()
@@ -38,8 +37,9 @@ public class DatabaseCustomer
     }
 
     /**
-     * Method to show customer by id
-     * @return customer
+     * Method to show customer by id from the database
+     * @param id variable that stores information id of customer
+     * @return customer as object
      */
     public static Customer getCustomerById(int id) throws CustomerNotFoundException
     {
@@ -54,14 +54,15 @@ public class DatabaseCustomer
     }
 
     /**
-     * Method to add customer
-     * @return false default return param to check successability
+     * Method to add customer into the database
+     * @param customer parameter that passes object customer
+     * @return boolean that show the succession of the method
      */
     public static boolean addCustomer(Customer customer) throws EmailAlreadyExistsException
     {
         for(Customer customers:CUSTOMER_DATABASE)
         {
-            if (customers.getEmail() == customer.getEmail())
+            if (customers.getEmail().equals(customer.getEmail()))
             {
                 throw new EmailAlreadyExistsException(customer);
             }
@@ -72,8 +73,9 @@ public class DatabaseCustomer
     }
 
     /**
-     * Method to remove customer
-     * @return false default return param to check successability
+     * Method to remove customer from database
+     * @param id variable that stores id of customer
+     * @return boolean that show the succession of the method
      */
     public static boolean removeCustomer(int id) throws CustomerNotFoundException
     {
@@ -88,5 +90,4 @@ public class DatabaseCustomer
         }
         throw new CustomerNotFoundException(id);
     }
-
 }

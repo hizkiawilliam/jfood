@@ -1,10 +1,10 @@
-
 /**
- * Enumeration class FoodCategory - write a description of the enum class here
+ * Enumeration class FoodCategory
  *
  * @author Hizkia William Eben
- * @version 03.04.2020
+ * @version 13.04.2020
  */
+
 public enum FoodCategory
 {
     Beverages("Beverages"), 
@@ -17,12 +17,20 @@ public enum FoodCategory
     Japanese("Japanese");
     
     private String toString;
-    
+
+    /**
+     * Constructor for Food category
+     * @param toString variable that stores string to print food category
+     */
     FoodCategory(String toString)
     {
         this.toString = toString;
     }
-    
+
+    /**
+     * Method to print food category
+     * @return toString variable that stores string to print food category
+     */
     public String toString()
     {
         return this.toString;

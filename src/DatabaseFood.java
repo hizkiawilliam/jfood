@@ -1,18 +1,14 @@
-
 /**
  * Write a description of class DatabaseFood here.
  *
  * @author Hizkia William Eben
- * @version 03.04.2020
+ * @version 13.04.2020
  */
-
-import jdk.jfr.Category;
 
 import java.util.ArrayList;
 
 public class DatabaseFood
 {
-    // instance variables - replace the example below with your own
     private static ArrayList<Food> FOOD_DATABASE= new ArrayList<Food>();
     private static int lastId = 0;
     
@@ -24,8 +20,8 @@ public class DatabaseFood
     }
 
     /**
-     * Method to show food list
-     * @return Database of foods
+     * Method to show food list from food database
+     * @return FOOD_DATABASE arraylist that contains all information of foods
      */
     public static ArrayList<Food> getFoodDatabase()
     {
@@ -33,8 +29,8 @@ public class DatabaseFood
     }
 
     /**
-     * Method to show last id
-     * @return last id in database
+     * Method to show last id of food in food database
+     * @return last id in food database
      */
     public static int getLastId()
     {
@@ -42,8 +38,9 @@ public class DatabaseFood
     }
 
     /**
-     * Method to show food by id
-     * @return food
+     * Method to show food by id from food database
+     * @param id variable that stores information id of food
+     * @return food as object
      */
     public static Food getFoodById(int id) throws FoodNotFoundException
     {
@@ -58,8 +55,9 @@ public class DatabaseFood
     }
 
     /**
-     * Method to show food by seller
-     * @return food
+     * Method to show food by seller from database
+     * @param sellerId variable that stores information of seller id
+     * @return food as object
      */
     public static ArrayList<Food> getFoodBySeller(int sellerId)
     {
@@ -75,8 +73,9 @@ public class DatabaseFood
     }
 
     /**
-     * Method to show food by category
-     * @return food
+     * Method to show food by category from food database
+     * @param category variable that stores information of food category
+     * @return categoryFoods array list of food grouped by category
      */
     public static ArrayList<Food> getFoodByCategory(FoodCategory category)
     {
@@ -97,9 +96,10 @@ public class DatabaseFood
     }
 
     /**
-    * Method to add food
-    * @return false default return param to check successability
-    */
+     * Method to add food into food database
+     * @param food passing variable that stores food object
+     * @return boolean that show the succession of the method
+     */
     public static boolean addFood(Food food)
     {
         for(Food foodCheck:FOOD_DATABASE)
@@ -115,9 +115,10 @@ public class DatabaseFood
     }
     
     /**
-    * Method to remove food
-    * @return false default return param to check successability
-    */
+     * Method to remove food from database
+     * @param id passing variable that stores food id
+     * @return boolean that show the succession of the method
+     */
     public static boolean removeFood(int id) throws FoodNotFoundException
     {
         for(int i = 0;  i < FOOD_DATABASE.size(); i++)

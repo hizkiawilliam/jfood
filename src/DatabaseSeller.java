@@ -1,16 +1,14 @@
-
 /**
  * Write a description of class DatabaseFood here.
  *
  * @author Hizkia William Eben
- * @version 03.04.2020
+ * @version 13.04.2020
  */
 
 import java.util.*;
 
 public class DatabaseSeller
 {
-    // instance variables - replace the example below with your own
     private static ArrayList<Seller> SELLER_DATABASE = new ArrayList<Seller>();
     private static int lastId = 0;
 
@@ -22,8 +20,8 @@ public class DatabaseSeller
     }
 
     /**
-     * Method to show seller list
-     * @return SELLER_DATABASE
+     * Method to show seller list from seller database
+     * @return SELLER_DATABASE array list that stores all sellers
      */
     public static ArrayList<Seller> getSellerDatabase()
     {
@@ -31,9 +29,10 @@ public class DatabaseSeller
     }
 
     /**
-    * Method to add seller
-    * @return false default return param for boolean
-    */
+     * Method to add seller into seller database
+     * @param seller passing parameter that stores object seller
+     * @return boolean that show the succession of the method
+     */
     public static boolean addSeller(Seller seller)
     {
         for(Seller sellerCheck:SELLER_DATABASE)
@@ -49,9 +48,10 @@ public class DatabaseSeller
     }
     
     /**
-    * Method to remove seller
-    * @return false default return param for boolean
-    */
+     * Method to remove seller from seller database
+     * @param id passing parameter that stores seller id
+     * @return boolean that show the succession of the method
+     */
     public static boolean removeSeller(int id) throws SellerNotFoundException
     {
         for(int i = 0;  i < SELLER_DATABASE.size(); i++)
@@ -66,9 +66,10 @@ public class DatabaseSeller
     }
     
     /**
-    * Method to show seller
-    * @return Seller with specific id
-    */
+     * Method to show seller from seller database
+     * @param id passing parameter that stores seller id
+     * @return Seller object with specific id
+     */
     public static Seller getSellerById(int id) throws SellerNotFoundException
     {
         for(Seller sellers:SELLER_DATABASE)
@@ -82,8 +83,8 @@ public class DatabaseSeller
     }
 
     /**
-     * Method to show seller
-     * @return int of total seller
+     * Method to show last id of seller in seller database
+     * @return lastId variable
      */
     public static int getLastId()
     {

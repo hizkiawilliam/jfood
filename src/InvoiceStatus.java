@@ -1,10 +1,10 @@
-
 /**
- * Enumeration class InvoiceStatus - write a description of the enum class here
+ * Enumeration class InvoiceStatus
  *
  * @author Hizkia William Eben
- * @version 03.04.2020
+ * @version 13.04.2020
  */
+
 public enum InvoiceStatus
 {
     Ongoing("Ongoing"), 
@@ -12,12 +12,20 @@ public enum InvoiceStatus
     Cancelled("Canceled");
     
     private String status;
-    
+
+    /**
+     * Constructor for Invoice Status
+     * @param status variable that stores string to print invoice status
+     */
     InvoiceStatus(String status)
     {
         this.status = status;
     }
-    
+
+    /**
+     * Method to print invoice status
+     * @return toString variable that stores string to print invoice status
+     */
     public String toString()
     {
         return this.status;

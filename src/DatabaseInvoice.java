@@ -2,7 +2,7 @@
  * Write a description of class DatabasePromo here.
  *
  * @author Hizkia William Eben
- * @version 03.04.2020
+ * @version 13.04.2020
  */
 
 import  java.util.ArrayList;
@@ -13,8 +13,8 @@ public class DatabaseInvoice
     private static int lastId = 0;
 
     /**
-     * Method to show food list
-     * @return Database of promo
+     * Method to show invoice list from invoice database
+     * @return INVOICE_DATABASE array list that stores all information about invoices
      */
     public static ArrayList<Invoice> getInvoiceDatabase()
     {
@@ -22,8 +22,8 @@ public class DatabaseInvoice
     }
 
     /**
-     * Method to show last id
-     * @return last id in database
+     * Method to show last id of invoice in invoice database
+     * @return last id in invoice database
      */
     public static int getLastId()
     {
@@ -31,10 +31,11 @@ public class DatabaseInvoice
     }
 
     /**
-     * Method to show invoice by id
-     * @return invoice
+     * Method to show invoice by id in invoice database
+     * @param id passing parameter that stores invoice id
+     * @return invoice as object
      */
-    public static Invoice getInvoiceById(int id)
+    public static Invoice getInvoiceById(int id) throws InvoiceNotFoundException
     {
         for(Invoice invoice : INVOICE_DATABASE)
         {
@@ -43,12 +44,13 @@ public class DatabaseInvoice
                 return invoice;
             }
         }
-        return null;
+        throw new InvoiceNotFoundException(id);
     }
 
     /**
-     * Method to show invoice by customer
-     * @return invoice
+     * Method to show invoice by customer from invoice database
+     * @param customerId passing parameter that stores customer id
+     * @return invoice as object
      */
     public static ArrayList<Invoice> getInvoiceByCustomer(int customerId)
     {
@@ -70,16 +72,17 @@ public class DatabaseInvoice
     }
 
     /**
-     * Method to add invoice
-     * @return false default return param to check successability
+     * Method to add invoice into invoice database
+     * @param invoice passing parameter that stores object invoice
+     * @return boolean that show the succession of the method
      */
-    public static boolean addInvoice(Invoice invoice)
+    public static boolean addInvoice(Invoice invoice) throws OngoingInvoiceAlreadyExistsException
     {
         for(Invoice invoiceCheck:INVOICE_DATABASE)
         {
             if (invoiceCheck.getCustomer() == invoice.getCustomer() && invoiceCheck.getInvoiceStatus() == InvoiceStatus.Ongoing)
             {
-                return false;
+                throw new OngoingInvoiceAlreadyExistsException(invoice);
             }
         }
         INVOICE_DATABASE.add(invoice);
@@ -88,8 +91,10 @@ public class DatabaseInvoice
     }
 
     /**
-     * Method to change invoice status
-     * @return false default return param to check successability
+     * Method to change invoice status in invoice database
+     * @param id passing parameter that stores invoice id
+     * @param invoiceStatus passing parameter that stores invoice status
+     * @return boolean that show the succession of the method
      */
     public static boolean changeInvoiceStatus(int id, InvoiceStatus invoiceStatus)
     {
@@ -105,10 +110,11 @@ public class DatabaseInvoice
     }
 
     /**
-     * Method to remove invoice
-     * @return false default return param to check successability
+     * Method to remove invoice from invoice database
+     * @param id passing parameter that stores invoice id
+     * @return boolean that show the succession of the method
      */
-    public static boolean removeInvoice(int id)
+    public static boolean removeInvoice(int id) throws InvoiceNotFoundException
     {
         for(int i = 0;  i < INVOICE_DATABASE.size(); i++)
         {
@@ -119,6 +125,6 @@ public class DatabaseInvoice
                 return true;
             }
         }
-        return false;
+        throw new InvoiceNotFoundException(id);
     }
 }

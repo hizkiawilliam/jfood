@@ -2,7 +2,7 @@
  * Class Invoice is class that stores information for every invoice object
  *
  * @author Hizkia William Eben
- * @version 03.04.2020
+ * @version 13.04.2020
  */
 
 import java.util.*;
@@ -93,76 +93,78 @@ public abstract class Invoice
     }
     
     /**
-    * Method as setter or mutator to set id of the invoice
-    * @param id variable for identifying Invoice
-    */
+     * Method as setter or mutator to set id of the invoice
+     * @param id variable for identifying Invoice
+     * @return id variable for identifying Invoice
+     */
     public void setId(int id)
     {
         this.id = id;
     }
     
     /**
-    * Method as setter or mutator to set idFood of the invoice
-    * @param foods variable to store id of foods
-    */
+     * Method as setter or mutator to set idFood of the invoice
+     * @param foods variable to store id of foods
+     */
     public void setFoods(ArrayList<Food> foods)
     {
         this.foods = foods;
     }
     
     /**
-    * Method as setter or mutator to set date of the invoice
-    * @param date variable to store email information
-    */
+     * Method as setter or mutator to set date of the invoice
+     * @param date variable to store email information
+     */
     public void setDate(Calendar date)
     {
         this.date = date;
     }
     
     /**
-    * Method as setter or mutator to set date of the invoice
-    * @param year variable to store year
-    * @param month variable to store month
-    * @param dayOfMonth variable to store day
-    */
+     * Method as setter or mutator to set date of the invoice with parameters
+     * @param year variable to store year
+     * @param month variable to store month
+     * @param dayOfMonth variable to store day
+     */
     public void setDate(int year, int month, int dayOfMonth)
     {
         this.date = new GregorianCalendar(year, month, dayOfMonth);
     }
     
     /**
-    * Method as setter or mutator to set total price of the invoice
-    */
+     * Method as setter or mutator to set total price of the invoice
+     */
     public abstract void setTotalPrice();
     
     /**
-    * Method as setter or mutator to set customer of the invoice
-    * @param customer variable to store information about customer
-    */
+     * Method as setter or mutator to set customer of the invoice
+     * @param customer variable to store information about customer
+     */
     public void setCustomer(Customer customer)
     {
         this.customer = customer;
     }
     
     /**
-    * Method as setter or mutator to set payment type of the invoice
-    */
+     * Method as setter or mutator to set payment type of the invoice
+     * @param paymentType passing parameter that stores payment type of invoice
+     */
     public void setPaymentType(PaymentType paymentType)
     {
         this.paymentType = paymentType;
     }
     
     /**
-    * Method as setter or mutator to set invoice status of the invoice
-    * @param status variable to store information about invoice status
-    */
+     * Method as setter or mutator to set invoice status of the invoice
+     * @param status variable to store information about invoice status
+     */
     public void setInvoiceStatus(InvoiceStatus status)
     {
         this.status = status;
     }
     
     /**
-    * Method to print data of the invoice
-    */
+     * Method to print data of the invoice
+     */
     public abstract String toString();
 }

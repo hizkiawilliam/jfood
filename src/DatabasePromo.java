@@ -2,20 +2,19 @@
  * Write a description of class DatabasePromo here.
  *
  * @author Hizkia William Eben
- * @version 03.04.2020
+ * @version 13.04.2020
  */
 
 import  java.util.ArrayList;
 
 public class DatabasePromo
 {
-    // instance variables - replace the example below with your own
     private static ArrayList<Promo> PROMO_DATABASE = new ArrayList<Promo>();
     private static int lastId = 0;
 
     /**
-     * Method to show promo list
-     * @return Database of promo
+     * Method to show promo list from promo database
+     * @return PROMO_DATABASE array list that stores information of all promo
      */
     public static ArrayList<Promo> getPromoDatabase()
     {
@@ -23,8 +22,8 @@ public class DatabasePromo
     }
 
     /**
-     * Method to show last id
-     * @return last id in database
+     * Method to show last id of promo in promo database
+     * @return last id of promo in database
      */
     public static int getLastId()
     {
@@ -32,8 +31,9 @@ public class DatabasePromo
     }
 
     /**
-     * Method to show promo by id
-     * @return promo
+     * Method to show promo by id in promo database
+     * @param id passing parameter that stores promo id
+     * @return promo as object
      */
     public static Promo getPromoById(int id) throws PromoNotFoundException
     {
@@ -48,8 +48,9 @@ public class DatabasePromo
     }
 
     /**
-     * Method to show promo by code
-     * @return food
+     * Method to show promo by code in promo database
+     * @param code passing parameter that stores promo code
+     * @return food as object
      */
     public static Promo getPromoByCode(String code)
     {
@@ -64,8 +65,9 @@ public class DatabasePromo
     }
 
     /**
-     * Method to add promo
-     * @return false default return param to check successability
+     * Method to add promo into promo database
+     * @param promo passing parameter that stores object promo
+     * @return boolean that show the succession of the method
      */
     public static boolean addPromo(Promo promo) throws PromoCodeAlreadyExistsException
     {
@@ -82,8 +84,9 @@ public class DatabasePromo
     }
 
     /**
-     * Method to activate promo
-     * @return false default return param to check successability
+     * Method to activate promo in promo database
+     * @param id passing parameter that stores promo id
+     * @return boolean that show the succession of the method
      */
     public static boolean activatePromo(int id)
     {
@@ -99,8 +102,9 @@ public class DatabasePromo
     }
 
     /**
-     * Method to deactivate promo
-     * @return false default return param to check successability
+     * Method to deactivate promo from promo database
+     * @param id passing parameter that stores promo id
+     * @return boolean that show the succession of the method
      */
     public static boolean deactivatePromo(int id)
     {
@@ -116,8 +120,9 @@ public class DatabasePromo
     }
 
     /**
-     * Method to remove promo
-     * @return false default return param to check successability
+     * Method to remove promo from promo database
+     * @param id passing parameter that stores promo id
+     * @return boolean that show the succession of the method
      */
     public static boolean removePromo(int id) throws PromoNotFoundException
     {
