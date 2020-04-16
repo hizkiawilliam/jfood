@@ -1,5 +1,5 @@
 /**
- * Write a description of class DatabaseFood here.
+ * Class DatabaseSeller contains all object of Sellers stored in ArrayList Seller
  *
  * @author Hizkia William Eben
  * @version 13.04.2020

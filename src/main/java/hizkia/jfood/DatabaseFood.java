@@ -1,5 +1,5 @@
 /**
- * Write a description of class DatabaseFood here.
+ * Class DatabaseFood contains all object of Foods stored in ArrayList Food
  *
  * @author Hizkia William Eben
  * @version 13.04.2020

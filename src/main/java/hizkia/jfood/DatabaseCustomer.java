@@ -1,5 +1,5 @@
 /**
- * Write a description of class DatabaseCustomer here.
+ * Class DatabaseCustomer contains all object of Customers stored in ArrayList Customer
  *
  * @author Hizkia William Eben
  * @version 13.04.2020
@@ -91,5 +91,23 @@ public class DatabaseCustomer
             }
         }
         throw new CustomerNotFoundException(id);
+    }
+
+    /**
+     * Method to remove customer from database
+     * @param email variable that stores email of customer
+     * @param password variable that stores password of customer
+     * @return boolean that show the succession of the method
+     */
+    public static Customer getCustomerLogin(String email, String password)
+    {
+        for(Customer customer:CUSTOMER_DATABASE)
+        {
+            if (email.equals(customer.getEmail()) && password.equals(customer.getPassword()))
+            {
+                return customer;
+            }
+        }
+        return null;
     }
 }

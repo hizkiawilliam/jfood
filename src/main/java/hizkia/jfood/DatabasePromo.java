@@ -1,5 +1,5 @@
 /**
- * Write a description of class DatabasePromo here.
+ * Class DatabasePromo contains all object of Promos stored in ArrayList Promo
  *
  * @author Hizkia William Eben
  * @version 13.04.2020
@@ -57,7 +57,7 @@ public class DatabasePromo
     {
         for(Promo promo:PROMO_DATABASE)
         {
-            if (code == promo.getCode())
+            if (code.equals(promo.getCode()))
             {
                 return promo;
             }

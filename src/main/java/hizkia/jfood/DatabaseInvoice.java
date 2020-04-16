@@ -1,5 +1,5 @@
 /**
- * Write a description of class DatabasePromo here.
+ * Class DatabaseInvoice contains all object of Invoices stored in ArrayList Invoice
  *
  * @author Hizkia William Eben
  * @version 13.04.2020
