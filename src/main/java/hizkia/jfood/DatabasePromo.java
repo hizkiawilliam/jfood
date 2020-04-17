@@ -74,7 +74,7 @@ public class DatabasePromo
     {
         for(Promo promoCheck:PROMO_DATABASE)
         {
-            if (promoCheck.getCode() == promo.getCode())
+            if (promoCheck.getCode().equals(promo.getCode()))
             {
                 throw new PromoCodeAlreadyExistsException(promo);
             }

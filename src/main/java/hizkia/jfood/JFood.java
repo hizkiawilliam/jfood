@@ -6,6 +6,7 @@
  */
 package hizkia.jfood;
 
+import java.util.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -47,7 +48,66 @@ public class JFood
             System.out.println(e.getMessage());
         }
 
+        //======================Add Customer==========================
+        Calendar calendar = new GregorianCalendar(2020, 4, 2);
+        try {
+            DatabaseCustomer.addCustomer(new Customer(DatabaseCustomer.getLastId()+1, "Ridho", "ridhogani@ui.ac.id", "YeahBoi27"));
+        }
+        catch (EmailAlreadyExistsException e){
+            System.out.println(e.getMessage());
+        }
 
+        try {
+            DatabaseCustomer.addCustomer(new Customer(DatabaseCustomer.getLastId()+1, "Hizkia", "hizkia.william@gmail.com", "curuChuchu44",calendar));
+        }
+        catch (EmailAlreadyExistsException e){
+            System.out.println(e.getMessage());
+        }
+/*
+        //======================Add ArraylistFood==========================
+        ArrayList<Food> newFood = new ArrayList<Food>();
+        ArrayList<Food> newFood2 = new ArrayList<Food>();
+
+        try {
+            newFood.add(DatabaseFood.getFoodById(1));
+        }
+        catch(FoodNotFoundException e){
+            System.out.println(e.getMessage());
+        }
+
+        try {
+            newFood2.add(DatabaseFood.getFoodById(1));
+        }
+        catch (FoodNotFoundException e){
+            System.out.println(e.getMessage());
+        }
+
+        try {
+            newFood2.add(DatabaseFood.getFoodById(2));
+        }
+        catch (FoodNotFoundException e){
+            System.out.println(e.getMessage());
+        }
+
+        try{
+            Invoice invoice = new CashInvoice(DatabaseInvoice.getLastId() + 1, newFood2, DatabaseCustomer.getCustomerById(1), 7000);
+            DatabaseInvoice.addInvoice(invoice);
+            DatabaseInvoice.getInvoiceById(DatabaseInvoice.getLastId()).setTotalPrice();
+            DatabaseInvoice.changeInvoiceStatus(1, InvoiceStatus.Finished);
+        }
+        catch (OngoingInvoiceAlreadyExistsException | CustomerNotFoundException | InvoiceNotFoundException e){
+            System.out.println(e.getMessage());
+        }
+
+        try{
+            Invoice invoice = new CashInvoice(DatabaseInvoice.getLastId() + 1, newFood, DatabaseCustomer.getCustomerById(2), 10000);
+            DatabaseInvoice.addInvoice(invoice);
+            DatabaseInvoice.getInvoiceById(DatabaseInvoice.getLastId()).setTotalPrice();
+            DatabaseInvoice.changeInvoiceStatus(2, InvoiceStatus.Cancelled);
+        }
+        catch (OngoingInvoiceAlreadyExistsException | CustomerNotFoundException | InvoiceNotFoundException e){
+            System.out.println(e.getMessage());
+        }*/
         SpringApplication.run(JFood.class, args);
 
     }

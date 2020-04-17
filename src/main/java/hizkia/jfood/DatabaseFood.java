@@ -80,7 +80,8 @@ public class DatabaseFood
      */
     public static ArrayList<Food> getFoodByCategory(FoodCategory category)
     {
-        ArrayList<Food> categoryFoods = new ArrayList<>();
+        ArrayList<Food> categoryFoods;
+        categoryFoods = new ArrayList<>();
         for(Food food:FOOD_DATABASE) {
             if (category == food.getCategory())
             {
