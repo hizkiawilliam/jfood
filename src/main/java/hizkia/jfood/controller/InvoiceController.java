@@ -1,3 +1,10 @@
+/**
+ * This is class will handle METHODS related to invoices
+ *
+ * @author Hizkia William Eben
+ * @version 17.04.2020
+ */
+
 package hizkia.jfood.controller;
 
 import hizkia.jfood.*;
@@ -9,24 +16,44 @@ import java.util.ArrayList;
 @RestController
 public class InvoiceController {
 
+    /**
+     * Method to prints all invoice in the data base
+     * @return all invoice in database
+     */
     @RequestMapping("")
     public ArrayList<Invoice> getAllInvoice()
     {
         return DatabaseInvoice.getInvoiceDatabase();
     }
 
+    /**
+     * Method to get invoice from id
+     * @param id variable to store id of invoice
+     * @return single invoice object
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Invoice getInvoiceById(@PathVariable int id) throws InvoiceNotFoundException {
         Invoice invoice = DatabaseInvoice.getInvoiceById(id);
         return invoice;
     }
 
+    /**
+     * Method to get invoice from customer
+     * @param customerId variable to store id of customer
+     * @return single invoice object
+     */
     @RequestMapping(value = "/customer/{customerId}", method = RequestMethod.GET)
     public ArrayList<Invoice> getInvoiceByCustomer(@PathVariable int customerId) throws InvoiceNotFoundException {
         ArrayList<Invoice> invoice = DatabaseInvoice.getInvoiceByCustomer(customerId);
         return invoice;
     }
 
+    /**
+     * Method to change invoice status
+     * @param id variable to store id of invoice
+     * @param status variabel to store status invoice
+     * @return single invoice object if success, null if failed
+     */
     @RequestMapping(value = "/invoiceStatus/{id}", method = RequestMethod.PUT)
     public Invoice changeInvoiceStatus(@RequestParam(value="id") @PathVariable int id, @RequestParam(value="status") InvoiceStatus status) throws InvoiceNotFoundException {
         if (DatabaseInvoice.changeInvoiceStatus(id, status))
@@ -36,6 +63,11 @@ public class InvoiceController {
         return null;
     }
 
+    /**
+     * Method to remove invoice
+     * @param id variable to store id of invoice
+     * @return true if success, null if failed
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public Boolean removeInvoice(@PathVariable int id) {
         try
@@ -49,10 +81,17 @@ public class InvoiceController {
         return true;
     }
 
+    /**
+     * Method to adds new invoice into database with cash payment type
+     * @param foodIdList variable that stores all foods that was purchased
+     * @param customerId variable that stores id of the customer
+     * @param deliveryFee variable that stores delivery fee
+     * @return object invoice that was added to database
+     */
     @RequestMapping(value = "/createCashInvoice", method = RequestMethod.POST)
     public Invoice addCashInvoice(@RequestParam(value="foodList") ArrayList<Integer> foodIdList,
                                   @RequestParam(value="customerId") int customerId,
-                                  @RequestParam(value="deliveryFee") int deliveryFee)
+                                  @RequestParam(value="deliveryFee",required = false,defaultValue = "0") int deliveryFee)
     {
         ArrayList<Food> menu = new ArrayList<>();
         for (Integer foodId : foodIdList)
@@ -77,10 +116,17 @@ public class InvoiceController {
         return null;
     }
 
+    /**
+     * Method to adds new invoice into database with cashless payment type
+     * @param foodIdList variable that stores all foods that was purchased
+     * @param customerId variable that stores id of the customer
+     * @param promoCode variable that stores promo code
+     * @return object invoice that was added to database
+     */
     @RequestMapping(value = "/createCashlessInvoice", method = RequestMethod.POST)
     public Invoice addCashlessInvoice(@RequestParam(value="foodList") ArrayList<Integer> foodIdList,
                                   @RequestParam(value="customerId") int customerId,
-                                  @RequestParam(value="promoCode") String promoCode)
+                                  @RequestParam(value="promoCode",required = false) String promoCode)
     {
         ArrayList<Food> menu = new ArrayList<>();
         for (Integer foodId : foodIdList)

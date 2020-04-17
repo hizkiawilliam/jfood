@@ -2,7 +2,7 @@
  * Class OngoingInvoiceAlreadyExistsException is class that serves as invoice error handling
  *
  * @author Hizkia William Eben
- * @version 13.04.2020
+ * @version 17.04.2020
  */
 package hizkia.jfood;
 

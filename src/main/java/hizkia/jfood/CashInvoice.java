@@ -1,8 +1,8 @@
 /**
- * Write a description of class CashInvoice here.
+ * Class CashInvoice represents object that handles Invoice with cash payment
  *
  * @author Hizkia William Eben
- * @version 13.04.2020
+ * @version 17.04.2020
  */
 package hizkia.jfood;
 

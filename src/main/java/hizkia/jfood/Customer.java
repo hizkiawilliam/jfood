@@ -2,7 +2,7 @@
 * Class Costumer is class that stores information for every customer object
 *
 * @author Hizkia William Eben
-* @version 03.04.2020
+* @version 17.04.2020
 */
 package hizkia.jfood;
 

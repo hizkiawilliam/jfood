@@ -2,7 +2,7 @@
  * Class Invoice is class that stores information for every invoice object
  *
  * @author Hizkia William Eben
- * @version 13.04.2020
+ * @version 17.04.2020
  */
 package hizkia.jfood;
 

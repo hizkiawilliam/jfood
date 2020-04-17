@@ -2,7 +2,7 @@
  * Class DatabasePromo contains all object of Promos stored in ArrayList Promo
  *
  * @author Hizkia William Eben
- * @version 13.04.2020
+ * @version 17.04.2020
  */
 package hizkia.jfood;
 

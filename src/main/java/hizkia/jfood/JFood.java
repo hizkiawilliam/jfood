@@ -1,8 +1,8 @@
 /**
- * Write a description of class JFood here.
+ * Main Program runs here
  *
  * @author Hizkia William Eben
- * @version 13.04.2020
+ * @version 17.04.2020
  */
 package hizkia.jfood;
 
@@ -15,7 +15,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class JFood
 {
     public static void main(String[] args) {
-
+/*
         //======================Add Location======================
         Location location1 = new Location("Depok", "Jawa Barat", "Universitas Indonesia");
         Location location2 = new Location("Jakarta Timur", "Jakarta", "Jalan Otista");
@@ -63,7 +63,7 @@ public class JFood
         catch (EmailAlreadyExistsException e){
             System.out.println(e.getMessage());
         }
-/*
+
         //======================Add ArraylistFood==========================
         ArrayList<Food> newFood = new ArrayList<Food>();
         ArrayList<Food> newFood2 = new ArrayList<Food>();

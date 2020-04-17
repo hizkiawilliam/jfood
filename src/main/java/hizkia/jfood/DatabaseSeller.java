@@ -2,7 +2,7 @@
  * Class DatabaseSeller contains all object of Sellers stored in ArrayList Seller
  *
  * @author Hizkia William Eben
- * @version 13.04.2020
+ * @version 17.04.2020
  */
 package hizkia.jfood;
 

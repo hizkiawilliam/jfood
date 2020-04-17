@@ -2,7 +2,7 @@
  * Class DatabaseInvoice contains all object of Invoices stored in ArrayList Invoice
  *
  * @author Hizkia William Eben
- * @version 13.04.2020
+ * @version 17.04.2020
  */
 package hizkia.jfood;
 
@@ -122,7 +122,7 @@ public class DatabaseInvoice
             Invoice invoice = INVOICE_DATABASE.get(i);
             if (id == invoice.getId())
             {
-                INVOICE_DATABASE.remove(id);
+                INVOICE_DATABASE.remove(invoice);
                 return true;
             }
         }

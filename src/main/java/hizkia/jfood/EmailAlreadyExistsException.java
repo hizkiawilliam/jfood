@@ -2,7 +2,7 @@
  * Class EmailAlreadyExistsException is class that serves as email error handling when adding new customer to customer database
  *
  * @author Hizkia William Eben
- * @version 13.04.2020
+ * @version 17.04.2020
  */
 package hizkia.jfood;
 
