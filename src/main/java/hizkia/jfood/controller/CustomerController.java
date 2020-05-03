@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 
 @RequestMapping("/customer")
+@CrossOrigin(origins = "*", allowedHeaders = "")
 @RestController
 
 public class CustomerController {
@@ -68,14 +69,12 @@ public class CustomerController {
 
     /**
      * Method to log into the application
-     * @param name variable that stores name of the customer
      * @param email variable that stores email of the customer
      * @param password variable that stores password of the customer
      * @return object customer that was logged in
      */
     @RequestMapping(value = "/login", method = RequestMethod.POST)
-    public Customer loginCustomer(@RequestParam(value="name") String name,
-                                  @RequestParam(value="email") String email,
+    public Customer loginCustomer(@RequestParam(value="email") String email,
                                   @RequestParam(value="password") String password)
     {
         return DatabaseCustomer.getCustomerLogin(email, password);

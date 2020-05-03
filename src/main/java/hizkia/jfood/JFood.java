@@ -15,6 +15,27 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class JFood
 {
     public static void main(String[] args) {
+
+        //LOCATION
+        Location location1 = new Location("Depok", "Jawa Barat", "Universitas Indonesia");
+
+        //SELLER
+        DatabaseSeller.addSeller(new Seller(DatabaseSeller.getLastId()+1, "Hizkia William", "hizkia.william@ui.ac.id", "082298840430", location1));
+
+        //FOOD
+        try{
+            DatabaseFood.addFood(new Food(DatabaseFood.getLastId()+1,"Fried Chicken", DatabaseSeller.getSellerById(1), 28000, FoodCategory.Western));
+        }
+        catch (SellerNotFoundException e){
+            System.out.println(e.getMessage());
+        }
+
+        try{
+            DatabaseFood.addFood(new Food(DatabaseFood.getLastId()+1,"French Fries", DatabaseSeller.getSellerById(1), 25000, FoodCategory.Western));
+        }
+        catch (SellerNotFoundException e){
+            System.out.println(e.getMessage());
+        }
 /*
         //======================Add Location======================
         Location location1 = new Location("Depok", "Jawa Barat", "Universitas Indonesia");

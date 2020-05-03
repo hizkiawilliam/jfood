@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 
 @RequestMapping("/promo")
+@CrossOrigin(origins = "*", allowedHeaders = "")
 @RestController
 public class PromoController {
 
