@@ -34,7 +34,7 @@ public class SellerController {
      * @return single seller object
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
-    public Seller getFoodById(@PathVariable int id) throws SellerNotFoundException {
+    public Seller getSellerById(@PathVariable int id) throws SellerNotFoundException {
         Seller seller = DatabaseSeller.getSellerById(id);
         return seller;
     }
@@ -61,5 +61,4 @@ public class SellerController {
         DatabaseSeller.addSeller(seller);
         return seller;
     }
-
 }

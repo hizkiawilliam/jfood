@@ -15,7 +15,8 @@ public enum FoodCategory
     Rice("Rice"), 
     Noodles("Noodles"), 
     Bakery("Bakery"), 
-    Japanese("Japanese");
+    Japanese("Japanese"),
+    Korean("Korean");
     
     private String toString;
 

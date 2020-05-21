@@ -123,7 +123,7 @@ public class Promo
 
     /**
     * Method to set all variables Promo to String
-    */    
+    */
     public String toString()
     {
          return  "==========Promo==========" +

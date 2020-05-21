@@ -45,8 +45,24 @@ public class InvoiceController {
      */
     @RequestMapping(value = "/customer/{customerId}", method = RequestMethod.GET)
     public ArrayList<Invoice> getInvoiceByCustomer(@PathVariable int customerId) throws InvoiceNotFoundException {
-        ArrayList<Invoice> invoice = DatabaseInvoice.getInvoiceByCustomer(customerId);
-        return invoice;
+        ArrayList<Invoice> invoices = DatabaseInvoice.getInvoiceByCustomer(customerId);
+        return invoices;
+    }
+
+    /**
+     * Method to get invoice from customer with ongoing status
+     * @param customerId variable to store id of customer
+     * @return single invoice object
+     */
+    @RequestMapping(value = "/customerOngoing/{customerId}", method = RequestMethod.GET)
+    public Invoice getInvoiceOngoingByCustomer(@PathVariable int customerId) throws InvoiceNotFoundException {
+        ArrayList<Invoice>invoices = DatabaseInvoice.getInvoiceByCustomer(customerId);
+        for(Invoice invoice:invoices){
+            if(invoice.getInvoiceStatus() == InvoiceStatus.Ongoing){
+                return invoice;
+            }
+        }
+        return null;
     }
 
     /**
@@ -150,7 +166,18 @@ public class InvoiceController {
         }
         catch (OngoingInvoiceAlreadyExistsException | CustomerNotFoundException | InvoiceNotFoundException e){
             System.out.println(e.getMessage());
-        }
-        return null;
+        }return null;
+    }
+
+    @RequestMapping(value = "/cancel", method = RequestMethod.POST)
+    public Invoice cancelTransaction(@RequestParam(value="id") int id_invoice) throws InvoiceNotFoundException {
+        DatabaseInvoice.getInvoiceById(id_invoice).setInvoiceStatus(InvoiceStatus.Cancelled);
+        return DatabaseInvoice.getInvoiceById(id_invoice);
+    }
+
+    @RequestMapping(value = "/finish", method = RequestMethod.POST)
+    public Invoice finishTransaction(@RequestParam(value="id") int id_invoice) throws InvoiceNotFoundException {
+        DatabaseInvoice.getInvoiceById(id_invoice).setInvoiceStatus(InvoiceStatus.Finished);
+        return DatabaseInvoice.getInvoiceById(id_invoice);
     }
 }

@@ -20,7 +20,9 @@ public class JFood
         Location location1 = new Location("Depok", "Jawa Barat", "Universitas Indonesia");
 
         //SELLER
-        DatabaseSeller.addSeller(new Seller(DatabaseSeller.getLastId()+1, "Hizkia William", "hizkia.william@ui.ac.id", "082298840430", location1));
+        DatabaseSeller.addSeller(new Seller(DatabaseSeller.getLastId()+1, "Geraldy Christanto", "geraldy.christanto@ui.ac.id", "082245910341", location1));
+        DatabaseSeller.addSeller(new Seller(DatabaseSeller.getLastId()+1, "Darrell Yonathan", "darrell.yonathan@ui.ac.id", "082297844221", location1));
+        DatabaseSeller.addSeller(new Seller(DatabaseSeller.getLastId()+1, "Ananda Rizky Duto", "ananda.rizky@ui.ac.id", "082238295642", location1));
 
         //FOOD
         try{
@@ -34,6 +36,74 @@ public class JFood
             DatabaseFood.addFood(new Food(DatabaseFood.getLastId()+1,"French Fries", DatabaseSeller.getSellerById(1), 25000, FoodCategory.Western));
         }
         catch (SellerNotFoundException e){
+            System.out.println(e.getMessage());
+        }
+
+        try{
+            DatabaseFood.addFood(new Food(DatabaseFood.getLastId()+1,"Ayam Hainan", DatabaseSeller.getSellerById(2), 22000, FoodCategory.Rice));
+        }
+        catch (SellerNotFoundException e){
+            System.out.println(e.getMessage());
+        }
+
+        try{
+            DatabaseFood.addFood(new Food(DatabaseFood.getLastId()+1,"Nasi Pecel", DatabaseSeller.getSellerById(2), 15000, FoodCategory.Rice));
+        }
+        catch (SellerNotFoundException e){
+            System.out.println(e.getMessage());
+        }
+
+        try{
+            DatabaseFood.addFood(new Food(DatabaseFood.getLastId()+1,"Nasi Goreng Ayam", DatabaseSeller.getSellerById(2), 18000, FoodCategory.Rice));
+        }
+        catch (SellerNotFoundException e){
+            System.out.println(e.getMessage());
+        }
+
+        try{
+            DatabaseFood.addFood(new Food(DatabaseFood.getLastId()+1,"Nasi Ayam Rica-rica", DatabaseSeller.getSellerById(2), 21000, FoodCategory.Rice));
+        }
+        catch (SellerNotFoundException e){
+            System.out.println(e.getMessage());
+        }
+
+        try{
+            DatabaseFood.addFood(new Food(DatabaseFood.getLastId()+1,"Bulgogi Rice", DatabaseSeller.getSellerById(3), 45000, FoodCategory.Korean));
+        }
+        catch (SellerNotFoundException e){
+            System.out.println(e.getMessage());
+        }
+
+        try{
+            DatabaseFood.addFood(new Food(DatabaseFood.getLastId()+1,"Korean BBQ", DatabaseSeller.getSellerById(3), 48000, FoodCategory.Korean));
+        }
+        catch (SellerNotFoundException e){
+            System.out.println(e.getMessage());
+        }
+
+        try{
+            DatabaseFood.addFood(new Food(DatabaseFood.getLastId()+1,"Bibimbap", DatabaseSeller.getSellerById(3), 39000, FoodCategory.Korean));
+        }
+        catch (SellerNotFoundException e){
+            System.out.println(e.getMessage());
+        }
+
+
+
+        //Customer
+        Calendar calendar = new GregorianCalendar(2020, 4, 2);
+        try {
+            DatabaseCustomer.addCustomer(new Customer(DatabaseCustomer.getLastId()+1, "Hizkia", "williamhizkia@gmail.com", "hEllO123"));
+        }
+        catch (EmailAlreadyExistsException e){
+            System.out.println(e.getMessage());
+        }
+
+        //Promo
+        try {
+            DatabasePromo.addPromo(new Promo(DatabasePromo.getLastId()+1, "Libur", 5000, 10000, true));
+        }
+        catch (PromoCodeAlreadyExistsException e){
             System.out.println(e.getMessage());
         }
 /*
