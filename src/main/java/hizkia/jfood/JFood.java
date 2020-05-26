@@ -93,7 +93,7 @@ public class JFood
         //Customer
         Calendar calendar = new GregorianCalendar(2020, 4, 2);
         try {
-            DatabaseCustomer.addCustomer(new Customer(DatabaseCustomer.getLastId()+1, "Hizkia", "williamhizkia@gmail.com", "hEllO123"));
+            DatabaseCustomer.addCustomer(new Customer(DatabaseCustomer.getLastId()+1, "Hizkia William", "williamhizkia@gmail.com", "hEllO123"));
         }
         catch (EmailAlreadyExistsException e){
             System.out.println(e.getMessage());

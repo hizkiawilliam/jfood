@@ -26,7 +26,7 @@ public class Customer
     * @param password variable to store password
     * @param joinDate variable to store join date of customer
     */
-    public Customer(int id, String name, String email, String password, Calendar joinDate)
+    public Customer(int id, String name, String email, String username, String password, Calendar joinDate)
     {
         this.id = id;
         this.name = name;
@@ -45,7 +45,7 @@ public class Customer
     * @param month variable to store join month of customer
     * @param dayOfMonth variable to store join day of customer
     */                
-    public Customer(int id, String name, String email, String password, int year, int month, int dayOfMonth)
+    public Customer(int id, String name, String email , String password, int year, int month, int dayOfMonth)
     {
         this.id = id;
         this.name = name;
@@ -140,17 +140,7 @@ public class Customer
     */
     public void setEmail(String email)
     {
-        String regex = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^-]+(?:\\.[a-zA-Z0-9_!#$%&'*+/=?`{|}~^-]+)*@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(email);
-        if(matcher.matches()==true)
-        {
-            this.email = email;
-        }
-        else
-        {
-            this.email = "";
-        }   
+        this.email = email;
     }
                 
     /**
@@ -159,17 +149,7 @@ public class Customer
     */
     public void setPassword(String password)
     {
-        String regex = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{6,}$";
-        Pattern pattern = Pattern.compile(regex);
-        Matcher matcher = pattern.matcher(password);
-        if(matcher.matches()==true)
-        {
-            this.password = password;
-        }
-        else
-        {
-            this.password = "";
-        }   
+        this.password = password;
     }
             
     /**

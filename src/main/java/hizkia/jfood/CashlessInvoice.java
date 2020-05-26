@@ -75,12 +75,9 @@ public class CashlessInvoice extends Invoice
         super.totalPrice = 0;
         for(Food foods: getFoods())
         {
-            if ((promo != null) && (promo.getActive()) && (foods.getPrice() >= promo.getMinPrice())) {
-                super.totalPrice += foods.getPrice() - promo.getDiscount();
-            } else {
-                super.totalPrice += foods.getPrice();
-            }
+            super.totalPrice += foods.getPrice();
         }
+        super.totalPrice -= promo.getDiscount();
     }
 
     /**

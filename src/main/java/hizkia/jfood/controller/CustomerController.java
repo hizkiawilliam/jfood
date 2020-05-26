@@ -11,6 +11,8 @@ import hizkia.jfood.*;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @RequestMapping("/customer")
 @CrossOrigin(origins = "*", allowedHeaders = "")
@@ -57,14 +59,24 @@ public class CustomerController {
                                 @RequestParam(value="email") String email,
                                 @RequestParam(value="password") String password)
     {
-        Customer customer = new Customer(DatabaseCustomer.getLastId()+1, name, email, password);
-        try {
-            DatabaseCustomer.addCustomer(customer);
-        } catch (EmailAlreadyExistsException e) {
-            e.getMessage();
-            return null;
+        String regexEmail = "^[a-zA-Z0-9_!#$%&'*+/=?`{|}~^-]+(?:\\.[a-zA-Z0-9_!#$%&'*+/=?`{|}~^-]+)*@[a-zA-Z0-9-]+(?:\\.[a-zA-Z0-9-]+)*$";
+        Pattern patternEmail = Pattern.compile(regexEmail);
+        Matcher matcherEmail = patternEmail.matcher(email);
+
+        String regexPass = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z]).{6,}$";
+        Pattern patternPass = Pattern.compile(regexPass);
+        Matcher matcherPass = patternPass.matcher(password);
+        if(matcherEmail.matches() && matcherPass.matches()){
+            Customer customer = new Customer(DatabaseCustomer.getLastId()+1, name, email, password);
+//        try {
+//            DatabaseCustomerPostgre.insertCustomer(name,email,password);
+//        } catch (EmailAlreadyExistsException e) {
+//            e.getMessage();
+//            return null;
+//        }
+            return DatabaseCustomerPostgre.insertCustomer(customer);
         }
-        return customer;
+        return null;
     }
 
     /**

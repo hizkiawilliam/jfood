@@ -122,6 +122,17 @@ public class InvoiceController {
 
         }
         try{
+//            for(Invoice invoiceCheck:DatabaseInvoice.getInvoiceByCustomer(customerId))
+//            {
+//                if (invoiceCheck.getInvoiceStatus() == InvoiceStatus.Ongoing)
+//                {
+//                    ArrayList<Food> invoiceMenu;
+//                    invoiceMenu = invoiceCheck.getFoods();
+//                    invoiceMenu.addAll(menu);
+//                    invoiceCheck.setFoods(invoiceMenu);
+//                    return invoiceCheck;
+//                }
+//            }
             Invoice invoice = new CashInvoice(DatabaseInvoice.getLastId() + 1, menu, DatabaseCustomer.getCustomerById(customerId), deliveryFee);
             DatabaseInvoice.addInvoice(invoice);
             DatabaseInvoice.getInvoiceById(DatabaseInvoice.getLastId()).setTotalPrice();
@@ -159,6 +170,17 @@ public class InvoiceController {
 
         Promo promo = DatabasePromo.getPromoByCode(promoCode);
         try{
+//            for(Invoice invoiceCheck:DatabaseInvoice.getInvoiceByCustomer(customerId))
+//            {
+//                if (invoiceCheck.getInvoiceStatus() == InvoiceStatus.Ongoing)
+//                {
+//                    ArrayList<Food> invoiceMenu;
+//                    invoiceMenu = invoiceCheck.getFoods();
+//                    invoiceMenu.addAll(menu);
+//                    invoiceCheck.setFoods(invoiceMenu);
+//                    return invoiceCheck;
+//                }
+//            }
             Invoice invoice = new CashlessInvoice(DatabaseInvoice.getLastId() + 1, menu, DatabaseCustomer.getCustomerById(customerId), promo);
             DatabaseInvoice.addInvoice(invoice);
             DatabaseInvoice.getInvoiceById(DatabaseInvoice.getLastId()).setTotalPrice();
