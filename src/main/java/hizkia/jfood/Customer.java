@@ -26,7 +26,7 @@ public class Customer
     * @param password variable to store password
     * @param joinDate variable to store join date of customer
     */
-    public Customer(int id, String name, String email, String username, String password, Calendar joinDate)
+    public Customer(int id, String name, String email, String password, Calendar joinDate)
     {
         this.id = id;
         this.name = name;
@@ -45,7 +45,7 @@ public class Customer
     * @param month variable to store join month of customer
     * @param dayOfMonth variable to store join day of customer
     */                
-    public Customer(int id, String name, String email , String password, int year, int month, int dayOfMonth)
+    public Customer(int id, String name, String email, String password, int year, int month, int dayOfMonth)
     {
         this.id = id;
         this.name = name;

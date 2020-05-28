@@ -4,7 +4,11 @@
  * @author Hizkia William Eben
  * @version 17.04.2020
  */
-package hizkia.jfood;
+package hizkia.jfood.database;
+
+import hizkia.jfood.Promo;
+import hizkia.jfood.exception.PromoCodeAlreadyExistsException;
+import hizkia.jfood.exception.PromoNotFoundException;
 
 import  java.util.ArrayList;
 

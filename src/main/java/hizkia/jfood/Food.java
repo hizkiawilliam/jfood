@@ -6,19 +6,21 @@
  */
 package hizkia.jfood;
 
+import hizkia.jfood.unused.FoodCategory;
+
 public class Food
 {
     private int id;
     private String name;
     private int price;
     private Seller seller;
-    private FoodCategory category;
+    private String category;
 
 
     /**
      * Constructor for objects of class Food
      */
-    public Food(int id, String name, Seller seller, int price, FoodCategory category)
+    public Food(int id, String name, Seller seller, int price, String category)
     {
         this.id = id;
         this.name = name;
@@ -58,7 +60,7 @@ public class Food
      * Method as accessor to get category of the food
      * @return category variable that stores category of food
      */
-    public FoodCategory getCategory()
+    public String getCategory()
     {
         return category;
     }

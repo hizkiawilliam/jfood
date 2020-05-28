@@ -6,6 +6,9 @@
  */
 package hizkia.jfood;
 
+import hizkia.jfood.database.DatabaseInvoiceStatusPostgres;
+import hizkia.jfood.unused.InvoiceStatus;
+
 import java.util.*;
 
 public abstract class Invoice
@@ -15,8 +18,8 @@ public abstract class Invoice
     private Calendar date;
     protected int totalPrice = 0;
     private Customer customer;
-    private InvoiceStatus status;
-    private PaymentType paymentType;
+    private String status;
+    private String paymentType;
 
     /**
      * Constructor for objects of class Customer
@@ -30,7 +33,7 @@ public abstract class Invoice
         this.foods = foods;
         this.customer = customer;
         this.date = new GregorianCalendar();
-        this.status = InvoiceStatus.Ongoing;
+        this.status = DatabaseInvoiceStatusPostgres.getInvoiceStatus("Ongoing");
     }
     
     /**
@@ -82,13 +85,13 @@ public abstract class Invoice
      * Method as accessor to get payment type information in the invoice
      * @return paymentType object that stores payment type information of the invoice
      */
-    public abstract PaymentType getPaymentType();
+    public abstract String getPaymentType();
     
     /**
      * Method as accessor to get invoice status of the invoice
      * @return totalPrice variable that stores invoice status of the invoice
      */
-    public InvoiceStatus getInvoiceStatus()
+    public String getInvoiceStatus()
     {
         return status;
     }
@@ -150,7 +153,7 @@ public abstract class Invoice
      * Method as setter or mutator to set payment type of the invoice
      * @param paymentType passing parameter that stores payment type of invoice
      */
-    public void setPaymentType(PaymentType paymentType)
+    public void setPaymentType(String paymentType)
     {
         this.paymentType = paymentType;
     }
@@ -159,7 +162,7 @@ public abstract class Invoice
      * Method as setter or mutator to set invoice status of the invoice
      * @param status variable to store information about invoice status
      */
-    public void setInvoiceStatus(InvoiceStatus status)
+    public void setInvoiceStatus(String status)
     {
         this.status = status;
     }

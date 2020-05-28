@@ -8,6 +8,12 @@
 package hizkia.jfood.controller;
 
 import hizkia.jfood.*;
+import hizkia.jfood.database.*;
+import hizkia.jfood.exception.CustomerNotFoundException;
+import hizkia.jfood.exception.FoodNotFoundException;
+import hizkia.jfood.exception.InvoiceNotFoundException;
+import hizkia.jfood.exception.OngoingInvoiceAlreadyExistsException;
+import hizkia.jfood.unused.InvoiceStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -24,7 +30,7 @@ public class InvoiceController {
     @RequestMapping("")
     public ArrayList<Invoice> getAllInvoice()
     {
-        return DatabaseInvoice.getInvoiceDatabase();
+        return DatabaseInvoicePosgres.getInvoiceDatabase();
     }
 
     /**
@@ -34,8 +40,7 @@ public class InvoiceController {
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Invoice getInvoiceById(@PathVariable int id) throws InvoiceNotFoundException {
-        Invoice invoice = DatabaseInvoice.getInvoiceById(id);
-        return invoice;
+        return DatabaseInvoicePosgres.getInvoiceById(id);
     }
 
     /**
@@ -45,8 +50,7 @@ public class InvoiceController {
      */
     @RequestMapping(value = "/customer/{customerId}", method = RequestMethod.GET)
     public ArrayList<Invoice> getInvoiceByCustomer(@PathVariable int customerId) throws InvoiceNotFoundException {
-        ArrayList<Invoice> invoices = DatabaseInvoice.getInvoiceByCustomer(customerId);
-        return invoices;
+        return DatabaseInvoicePosgres.getInvoiceByCustomer(customerId);
     }
 
     /**
@@ -56,9 +60,9 @@ public class InvoiceController {
      */
     @RequestMapping(value = "/customerOngoing/{customerId}", method = RequestMethod.GET)
     public Invoice getInvoiceOngoingByCustomer(@PathVariable int customerId) throws InvoiceNotFoundException {
-        ArrayList<Invoice>invoices = DatabaseInvoice.getInvoiceByCustomer(customerId);
+        ArrayList<Invoice>invoices = DatabaseInvoicePosgres.getInvoiceByCustomer(customerId);
         for(Invoice invoice:invoices){
-            if(invoice.getInvoiceStatus() == InvoiceStatus.Ongoing){
+            if(invoice.getInvoiceStatus() == DatabaseInvoiceStatusPostgres.getInvoiceStatus("Ongoing")){
                 return invoice;
             }
         }
@@ -72,7 +76,7 @@ public class InvoiceController {
      * @return single invoice object if success, null if failed
      */
     @RequestMapping(value = "/invoiceStatus/{id}", method = RequestMethod.PUT)
-    public Invoice changeInvoiceStatus(@RequestParam(value="id") @PathVariable int id, @RequestParam(value="status") InvoiceStatus status) throws InvoiceNotFoundException {
+    public Invoice changeInvoiceStatus(@RequestParam(value="id") @PathVariable int id, @RequestParam(value="status") String status) throws InvoiceNotFoundException {
         if (DatabaseInvoice.changeInvoiceStatus(id, status))
         {
             return DatabaseInvoice.getInvoiceById(id);
@@ -87,15 +91,7 @@ public class InvoiceController {
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
     public Boolean removeInvoice(@PathVariable int id) {
-        try
-        {
-            DatabaseInvoice.removeInvoice(id);
-        } catch (InvoiceNotFoundException e)
-        {
-            e.printStackTrace();
-            return null;
-        }
-        return true;
+        return DatabaseInvoicePosgres.deleteInvoice(id);
     }
 
     /**
@@ -113,33 +109,22 @@ public class InvoiceController {
         ArrayList<Food> menu = new ArrayList<>();
         for (Integer foodId : foodIdList)
         {
-            try
-            {
-                menu.add(DatabaseFood.getFoodById(foodId));
-            } catch (FoodNotFoundException e) {
-                e.printStackTrace();
-            }
-
+            menu.add(DatabaseFoodPostgres.getFoodById(foodId));
         }
         try{
-//            for(Invoice invoiceCheck:DatabaseInvoice.getInvoiceByCustomer(customerId))
-//            {
-//                if (invoiceCheck.getInvoiceStatus() == InvoiceStatus.Ongoing)
-//                {
-//                    ArrayList<Food> invoiceMenu;
-//                    invoiceMenu = invoiceCheck.getFoods();
-//                    invoiceMenu.addAll(menu);
-//                    invoiceCheck.setFoods(invoiceMenu);
-//                    return invoiceCheck;
-//                }
-//            }
-            Invoice invoice = new CashInvoice(DatabaseInvoice.getLastId() + 1, menu, DatabaseCustomer.getCustomerById(customerId), deliveryFee);
-            DatabaseInvoice.addInvoice(invoice);
-            DatabaseInvoice.getInvoiceById(DatabaseInvoice.getLastId()).setTotalPrice();
-            return invoice;
+            for(Invoice invoiceCheck:DatabaseInvoicePosgres.getInvoiceByCustomer(customerId))
+            {
+                if (invoiceCheck.getInvoiceStatus().equals("Ongoing"))
+                {
+                    return null;
+                }
+            }
+            Invoice invoice = new CashInvoice(DatabaseInvoice.getLastId() + 1, menu, DatabaseCustomerPostgres.getCustomerById(customerId), deliveryFee);
+            return DatabaseInvoicePosgres.insertCashInvoice(invoice, deliveryFee);
         }
-        catch (OngoingInvoiceAlreadyExistsException | CustomerNotFoundException | InvoiceNotFoundException e){
+        catch (Exception e){
             System.out.println(e.getMessage());
+            e.printStackTrace();
         }
         return null;
     }
@@ -159,47 +144,33 @@ public class InvoiceController {
         ArrayList<Food> menu = new ArrayList<>();
         for (Integer foodId : foodIdList)
         {
-            try
-            {
-                menu.add(DatabaseFood.getFoodById(foodId));
-            } catch (FoodNotFoundException e) {
-                e.printStackTrace();
-            }
-
+            menu.add(DatabaseFoodPostgres.getFoodById(foodId));
         }
 
-        Promo promo = DatabasePromo.getPromoByCode(promoCode);
+        Promo promo = DatabasePromoPostgres.getPromoByCode(promoCode);
         try{
-//            for(Invoice invoiceCheck:DatabaseInvoice.getInvoiceByCustomer(customerId))
-//            {
-//                if (invoiceCheck.getInvoiceStatus() == InvoiceStatus.Ongoing)
-//                {
-//                    ArrayList<Food> invoiceMenu;
-//                    invoiceMenu = invoiceCheck.getFoods();
-//                    invoiceMenu.addAll(menu);
-//                    invoiceCheck.setFoods(invoiceMenu);
-//                    return invoiceCheck;
-//                }
-//            }
-            Invoice invoice = new CashlessInvoice(DatabaseInvoice.getLastId() + 1, menu, DatabaseCustomer.getCustomerById(customerId), promo);
-            DatabaseInvoice.addInvoice(invoice);
-            DatabaseInvoice.getInvoiceById(DatabaseInvoice.getLastId()).setTotalPrice();
-            return invoice;
+            for(Invoice invoiceCheck:DatabaseInvoicePosgres.getInvoiceByCustomer(customerId))
+            {
+                if (invoiceCheck.getInvoiceStatus().equals("Ongoing"))
+                {
+                    return null;
+                }
+            }
+            Invoice invoice = new CashlessInvoice(DatabaseInvoice.getLastId() + 1, menu, DatabaseCustomerPostgres.getCustomerById(customerId), promo);
+            return DatabaseInvoicePosgres.insertCashlessInvoice(invoice,promoCode);
         }
-        catch (OngoingInvoiceAlreadyExistsException | CustomerNotFoundException | InvoiceNotFoundException e){
-            System.out.println(e.getMessage());
+        catch (Exception e){
+            e.printStackTrace();
         }return null;
     }
 
     @RequestMapping(value = "/cancel", method = RequestMethod.POST)
-    public Invoice cancelTransaction(@RequestParam(value="id") int id_invoice) throws InvoiceNotFoundException {
-        DatabaseInvoice.getInvoiceById(id_invoice).setInvoiceStatus(InvoiceStatus.Cancelled);
-        return DatabaseInvoice.getInvoiceById(id_invoice);
+    public Boolean cancelTransaction(@RequestParam(value="id") int id_invoice) throws InvoiceNotFoundException {
+        return DatabaseInvoicePosgres.changeInvoiceStatus(id_invoice, "Canceled");
     }
 
     @RequestMapping(value = "/finish", method = RequestMethod.POST)
-    public Invoice finishTransaction(@RequestParam(value="id") int id_invoice) throws InvoiceNotFoundException {
-        DatabaseInvoice.getInvoiceById(id_invoice).setInvoiceStatus(InvoiceStatus.Finished);
-        return DatabaseInvoice.getInvoiceById(id_invoice);
+    public Boolean finishTransaction(@RequestParam(value="id") int id_invoice) throws InvoiceNotFoundException {
+        return DatabaseInvoicePosgres.changeInvoiceStatus(id_invoice, "Finished");
     }
 }

@@ -8,6 +8,11 @@
 package hizkia.jfood.controller;
 
 import hizkia.jfood.*;
+import hizkia.jfood.database.DatabaseLocationPostgres;
+import hizkia.jfood.database.DatabaseSeller;
+import hizkia.jfood.database.DatabaseSellerPostgres;
+import hizkia.jfood.exception.SellerNotFoundException;
+import hizkia.jfood.Location;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -19,7 +24,7 @@ import java.util.ArrayList;
 public class SellerController {
 
     /**
-     * Method to prints all seller in the data base
+     * Method to prints all seller in the data base (unused)
      * @return all seller in database
      */
     @RequestMapping("")
@@ -35,7 +40,7 @@ public class SellerController {
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Seller getSellerById(@PathVariable int id) throws SellerNotFoundException {
-        Seller seller = DatabaseSeller.getSellerById(id);
+        Seller seller = DatabaseSellerPostgres.getSellerById(id);
         return seller;
     }
 
@@ -57,8 +62,8 @@ public class SellerController {
                             @RequestParam(value="description") String description,
                             @RequestParam(value="city") String city)
     {
-        Seller seller = new Seller(DatabaseSeller.getLastId()+1, name, email, phoneNumber, new Location(city, province, description));
-        DatabaseSeller.addSeller(seller);
+        Seller seller = new Seller(DatabaseSellerPostgres.getLastId()+1, name, email, phoneNumber, new Location(DatabaseLocationPostgres.getLastId()+1,city, province, description));
+        DatabaseSellerPostgres.insertSeller(seller);
         return seller;
     }
 }

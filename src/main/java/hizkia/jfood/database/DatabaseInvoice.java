@@ -4,7 +4,12 @@
  * @author Hizkia William Eben
  * @version 17.04.2020
  */
-package hizkia.jfood;
+package hizkia.jfood.database;
+
+import hizkia.jfood.Invoice;
+import hizkia.jfood.unused.InvoiceStatus;
+import hizkia.jfood.exception.InvoiceNotFoundException;
+import hizkia.jfood.exception.OngoingInvoiceAlreadyExistsException;
 
 import  java.util.ArrayList;
 
@@ -81,7 +86,7 @@ public class DatabaseInvoice
     {
         for(Invoice invoiceCheck:INVOICE_DATABASE)
         {
-            if (invoiceCheck.getCustomer() == invoice.getCustomer() && invoiceCheck.getInvoiceStatus() == InvoiceStatus.Ongoing)
+            if (invoiceCheck.getCustomer() == invoice.getCustomer() && invoiceCheck.getInvoiceStatus() == DatabaseInvoiceStatusPostgres.getInvoiceStatus("Ongoing"))
             {
                 throw new OngoingInvoiceAlreadyExistsException(invoice);
             }
@@ -97,11 +102,11 @@ public class DatabaseInvoice
      * @param invoiceStatus passing parameter that stores invoice status
      * @return boolean that show the succession of the method
      */
-    public static boolean changeInvoiceStatus(int id, InvoiceStatus invoiceStatus)
+    public static boolean changeInvoiceStatus(int id, String invoiceStatus)
     {
         for(Invoice invoice:INVOICE_DATABASE)
         {
-            if (id == invoice.getId() && invoice.getInvoiceStatus() == InvoiceStatus.Ongoing)
+            if (id == invoice.getId() && invoice.getInvoiceStatus() == DatabaseInvoiceStatusPostgres.getInvoiceStatus("Ongoing"))
             {
                 invoice.setInvoiceStatus(invoiceStatus);
                 return true;

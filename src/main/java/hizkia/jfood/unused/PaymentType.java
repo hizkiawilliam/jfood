@@ -4,13 +4,12 @@
  * @author Hizkia William Eben
  * @version 17.04.2020
  */
-package hizkia.jfood;
+package hizkia.jfood.unused;
 
 public enum PaymentType
 {
     Cashless("Cashless"), 
-    Cash("Cash"),
-    Undetermined("Undetermined");
+    Cash("Cash");
     
     private String payment;
 

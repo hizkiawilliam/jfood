@@ -4,7 +4,9 @@
  * @author Hizkia William Eben
  * @version 17.04.2020
  */
-package hizkia.jfood;
+package hizkia.jfood.exception;
+
+import hizkia.jfood.Invoice;
 
 public class OngoingInvoiceAlreadyExistsException extends Exception
 {

@@ -7,6 +7,10 @@
 package hizkia.jfood;
 
 import java.util.*;
+
+import hizkia.jfood.database.*;
+import hizkia.jfood.exception.EmailAlreadyExistsException;
+import hizkia.jfood.exception.SellerNotFoundException;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -17,95 +21,52 @@ public class JFood
     public static void main(String[] args) {
 
         //LOCATION
-        Location location1 = new Location("Depok", "Jawa Barat", "Universitas Indonesia");
-
+        //Location location1 = new Location("Depok", "Jawa Barat", "Universitas Indonesia");
+        //DatabaseLocationPostgre.insertLocation(location1);
         //SELLER
-        DatabaseSeller.addSeller(new Seller(DatabaseSeller.getLastId()+1, "Geraldy Christanto", "geraldy.christanto@ui.ac.id", "082245910341", location1));
-        DatabaseSeller.addSeller(new Seller(DatabaseSeller.getLastId()+1, "Darrell Yonathan", "darrell.yonathan@ui.ac.id", "082297844221", location1));
-        DatabaseSeller.addSeller(new Seller(DatabaseSeller.getLastId()+1, "Ananda Rizky Duto", "ananda.rizky@ui.ac.id", "082238295642", location1));
+//        DatabaseSeller.addSeller(new Seller(DatabaseSeller.getLastId()+1, "Geraldy Christanto", "geraldy.christanto@ui.ac.id", "082245910341", DatabaseLocationPostgres.getLocationById(1)));
+//        DatabaseSeller.addSeller(new Seller(DatabaseSeller.getLastId()+1, "Darrell Yonathan", "darrell.yonathan@ui.ac.id", "082297844221", DatabaseLocationPostgres.getLocationById(1)));
+//        DatabaseSeller.addSeller(new Seller(DatabaseSeller.getLastId()+1, "Ananda Rizky Duto", "ananda.rizky@ui.ac.id", "082238295642", DatabaseLocationPostgres.getLocationById(1)));
+//        DatabaseSellerPostgres.insertSeller(new Seller(DatabaseSeller.getLastId()+1, "Geraldy Christanto", "geraldy.christanto@ui.ac.id", "082245910341", DatabaseLocationPostgres.getLocationById(1)));
+//        DatabaseSellerPostgres.insertSeller(new Seller(DatabaseSeller.getLastId()+1, "Darrell Yonathan", "darrell.yonathan@ui.ac.id", "082297844221", DatabaseLocationPostgres.getLocationById(1)));
+//        DatabaseSellerPostgres.insertSeller(new Seller(DatabaseSeller.getLastId()+1, "Ananda Rizky Duto", "ananda.rizky@ui.ac.id", "082238295642", DatabaseLocationPostgres.getLocationById(1)));
 
-        //FOOD
-        try{
-            DatabaseFood.addFood(new Food(DatabaseFood.getLastId()+1,"Fried Chicken", DatabaseSeller.getSellerById(1), 28000, FoodCategory.Western));
-        }
-        catch (SellerNotFoundException e){
-            System.out.println(e.getMessage());
-        }
+//        DatabaseFoodPostgres.insertFood(new Food(DatabaseFood.getLastId()+1,"Fried Chicken", DatabaseSellerPostgres.getSellerById(1), 28000, DatabaseFoodCategoryPostgres.getFoodCategoryByName("Western")));
+//        DatabaseFoodPostgres.insertFood(new Food(DatabaseFood.getLastId()+1,"Fried Chicken", DatabaseSellerPostgres.getSellerById(1), 28000, DatabaseFoodCategoryPostgres.getFoodCategoryByName("Western")));
+//        DatabaseFoodPostgres.insertFood(new Food(DatabaseFood.getLastId()+1,"French Fries", DatabaseSellerPostgres.getSellerById(1), 25000, DatabaseFoodCategoryPostgres.getFoodCategoryByName("Western")));
+//        DatabaseFoodPostgres.insertFood(new Food(DatabaseFood.getLastId()+1,"Ayam Hainan", DatabaseSellerPostgres.getSellerById(2), 22000, DatabaseFoodCategoryPostgres.getFoodCategoryByName("Western")));
+//        DatabaseFoodPostgres.insertFood(new Food(DatabaseFood.getLastId()+1,"Nasi Pecel", DatabaseSellerPostgres.getSellerById(2), 15000, DatabaseFoodCategoryPostgres.getFoodCategoryByName("Rice")));
+//        DatabaseFoodPostgres.insertFood(new Food(DatabaseFood.getLastId()+1,"Nasi Goreng Ayam", DatabaseSellerPostgres.getSellerById(2), 18000, DatabaseFoodCategoryPostgres.getFoodCategoryByName("Rice")));
+//        DatabaseFoodPostgres.insertFood(new Food(DatabaseFood.getLastId()+1,"Nasi Ayam Rica-rica", DatabaseSellerPostgres.getSellerById(2), 21000, DatabaseFoodCategoryPostgres.getFoodCategoryByName("Rice")));
+//        DatabaseFoodPostgres.insertFood(new Food(DatabaseFood.getLastId()+1,"Bulgogi Rice", DatabaseSellerPostgres.getSellerById(3), 45000, DatabaseFoodCategoryPostgres.getFoodCategoryByName("Korean")));
+//        DatabaseFoodPostgres.insertFood(new Food(DatabaseFood.getLastId()+1,"Korean BBQ", DatabaseSellerPostgres.getSellerById(3), 48000, DatabaseFoodCategoryPostgres.getFoodCategoryByName("Korean")));
+//        DatabaseFoodPostgres.insertFood(new Food(DatabaseFood.getLastId()+1,"Bibimbap", DatabaseSellerPostgres.getSellerById(3), 39000, DatabaseFoodCategoryPostgres.getFoodCategoryByName("Korean")));
+//        DatabaseFoodPostgres.insertFood(new Food(DatabaseFood.getLastId()+1,"Topoki", DatabaseSellerPostgres.getSellerById(3), 40000, DatabaseFoodCategoryPostgres.getFoodCategoryByName("Korean")));
 
-        try{
-            DatabaseFood.addFood(new Food(DatabaseFood.getLastId()+1,"French Fries", DatabaseSeller.getSellerById(1), 25000, FoodCategory.Western));
-        }
-        catch (SellerNotFoundException e){
-            System.out.println(e.getMessage());
-        }
-
-        try{
-            DatabaseFood.addFood(new Food(DatabaseFood.getLastId()+1,"Ayam Hainan", DatabaseSeller.getSellerById(2), 22000, FoodCategory.Rice));
-        }
-        catch (SellerNotFoundException e){
-            System.out.println(e.getMessage());
-        }
-
-        try{
-            DatabaseFood.addFood(new Food(DatabaseFood.getLastId()+1,"Nasi Pecel", DatabaseSeller.getSellerById(2), 15000, FoodCategory.Rice));
-        }
-        catch (SellerNotFoundException e){
-            System.out.println(e.getMessage());
-        }
-
-        try{
-            DatabaseFood.addFood(new Food(DatabaseFood.getLastId()+1,"Nasi Goreng Ayam", DatabaseSeller.getSellerById(2), 18000, FoodCategory.Rice));
-        }
-        catch (SellerNotFoundException e){
-            System.out.println(e.getMessage());
-        }
-
-        try{
-            DatabaseFood.addFood(new Food(DatabaseFood.getLastId()+1,"Nasi Ayam Rica-rica", DatabaseSeller.getSellerById(2), 21000, FoodCategory.Rice));
-        }
-        catch (SellerNotFoundException e){
-            System.out.println(e.getMessage());
-        }
-
-        try{
-            DatabaseFood.addFood(new Food(DatabaseFood.getLastId()+1,"Bulgogi Rice", DatabaseSeller.getSellerById(3), 45000, FoodCategory.Korean));
-        }
-        catch (SellerNotFoundException e){
-            System.out.println(e.getMessage());
-        }
-
-        try{
-            DatabaseFood.addFood(new Food(DatabaseFood.getLastId()+1,"Korean BBQ", DatabaseSeller.getSellerById(3), 48000, FoodCategory.Korean));
-        }
-        catch (SellerNotFoundException e){
-            System.out.println(e.getMessage());
-        }
-
-        try{
-            DatabaseFood.addFood(new Food(DatabaseFood.getLastId()+1,"Bibimbap", DatabaseSeller.getSellerById(3), 39000, FoodCategory.Korean));
-        }
-        catch (SellerNotFoundException e){
-            System.out.println(e.getMessage());
-        }
+//        DatabaseFood.addFood(new Food(DatabaseFood.getLastId()+1,"Fried Chicken", DatabaseSellerPostgres.getSellerById(1), 28000, DatabaseFoodCategoryPostgres.getFoodCategoryByName("Western")));
+//        DatabaseFood.addFood(new Food(DatabaseFood.getLastId()+1,"French Fries", DatabaseSellerPostgres.getSellerById(1), 25000, DatabaseFoodCategoryPostgres.getFoodCategoryByName("Western")));
+//        DatabaseFood.addFood(new Food(DatabaseFood.getLastId()+1,"Ayam Hainan", DatabaseSellerPostgres.getSellerById(2), 22000, DatabaseFoodCategoryPostgres.getFoodCategoryByName("Western")));
+//        DatabaseFood.addFood(new Food(DatabaseFood.getLastId()+1,"Nasi Pecel", DatabaseSellerPostgres.getSellerById(2), 15000, DatabaseFoodCategoryPostgres.getFoodCategoryByName("Rice")));
+//        DatabaseFood.addFood(new Food(DatabaseFood.getLastId()+1,"Nasi Goreng Ayam", DatabaseSellerPostgres.getSellerById(2), 18000, DatabaseFoodCategoryPostgres.getFoodCategoryByName("Rice")));
+//        DatabaseFood.addFood(new Food(DatabaseFood.getLastId()+1,"Nasi Ayam Rica-rica", DatabaseSellerPostgres.getSellerById(2), 21000, DatabaseFoodCategoryPostgres.getFoodCategoryByName("Rice")));
+//        DatabaseFood.addFood(new Food(DatabaseFood.getLastId()+1,"Bulgogi Rice", DatabaseSellerPostgres.getSellerById(3), 45000, DatabaseFoodCategoryPostgres.getFoodCategoryByName("Korean")));
+//        DatabaseFood.addFood(new Food(DatabaseFood.getLastId()+1,"Korean BBQ", DatabaseSellerPostgres.getSellerById(3), 48000, DatabaseFoodCategoryPostgres.getFoodCategoryByName("Korean")));
+//        DatabaseFood.addFood(new Food(DatabaseFood.getLastId()+1,"Bibimbap", DatabaseSellerPostgres.getSellerById(3), 39000, DatabaseFoodCategoryPostgres.getFoodCategoryByName("Korean")));
+//        DatabaseFood.addFood(new Food(DatabaseFood.getLastId()+1,"Topoki", DatabaseSellerPostgres.getSellerById(3), 40000, DatabaseFoodCategoryPostgres.getFoodCategoryByName("Korean")));
 
 
 
         //Customer
-        Calendar calendar = new GregorianCalendar(2020, 4, 2);
-        try {
-            DatabaseCustomer.addCustomer(new Customer(DatabaseCustomer.getLastId()+1, "Hizkia William", "williamhizkia@gmail.com", "hEllO123"));
-        }
-        catch (EmailAlreadyExistsException e){
-            System.out.println(e.getMessage());
-        }
+//        try {
+//            DatabaseCustomer.addCustomer(new Customer(DatabaseCustomer.getLastId()+1, "Hizkia William", "williamhizkia@gmail.com", "hEllO123"));
+//        }
+//        catch (EmailAlreadyExistsException e){
+//            System.out.println(e.getMessage());
+//        }
 
         //Promo
-        try {
-            DatabasePromo.addPromo(new Promo(DatabasePromo.getLastId()+1, "Libur", 5000, 10000, true));
-        }
-        catch (PromoCodeAlreadyExistsException e){
-            System.out.println(e.getMessage());
-        }
+        //DatabasePromoPostgre.insertPromo(new Promo(DatabasePromo.getLastId()+1, "dirumahaja", 15000, 50000, true));
+
 /*
         //======================Add Location======================
         Location location1 = new Location("Depok", "Jawa Barat", "Universitas Indonesia");

@@ -4,7 +4,10 @@
  * @author Hizkia William Eben
  * @version 17.04.2020
  */
-package hizkia.jfood;
+package hizkia.jfood.database;
+
+import hizkia.jfood.Seller;
+import hizkia.jfood.exception.SellerNotFoundException;
 
 import java.util.*;
 

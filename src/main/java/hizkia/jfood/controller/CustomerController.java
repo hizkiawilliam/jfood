@@ -8,6 +8,8 @@
 package hizkia.jfood.controller;
 
 import hizkia.jfood.*;
+import hizkia.jfood.database.DatabaseCustomer;
+import hizkia.jfood.database.DatabaseCustomerPostgres;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -21,7 +23,7 @@ import java.util.regex.Pattern;
 public class CustomerController {
 
     /**
-     * Method to prints all customer in the data base
+     * Method to prints all customer in the data base (unused)
      * @return all customer in database
      */
     @RequestMapping("")
@@ -37,13 +39,7 @@ public class CustomerController {
      */
     @RequestMapping("/{id}")
     public Customer getCustomerById(@PathVariable int id) {
-        Customer customer = null;
-        try {
-            customer = DatabaseCustomer.getCustomerById(id);
-        } catch (CustomerNotFoundException e) {
-            e.getMessage();
-            return null;
-        }
+        Customer customer = DatabaseCustomerPostgres.getCustomerById(id);
         return customer;
     }
 
@@ -67,14 +63,8 @@ public class CustomerController {
         Pattern patternPass = Pattern.compile(regexPass);
         Matcher matcherPass = patternPass.matcher(password);
         if(matcherEmail.matches() && matcherPass.matches()){
-            Customer customer = new Customer(DatabaseCustomer.getLastId()+1, name, email, password);
-//        try {
-//            DatabaseCustomerPostgre.insertCustomer(name,email,password);
-//        } catch (EmailAlreadyExistsException e) {
-//            e.getMessage();
-//            return null;
-//        }
-            return DatabaseCustomerPostgre.insertCustomer(customer);
+            Customer customer = new Customer(DatabaseCustomerPostgres.getLastId()+1, name, email, password);
+            return DatabaseCustomerPostgres.insertCustomer(customer);
         }
         return null;
     }
@@ -89,6 +79,6 @@ public class CustomerController {
     public Customer loginCustomer(@RequestParam(value="email") String email,
                                   @RequestParam(value="password") String password)
     {
-        return DatabaseCustomer.getCustomerLogin(email, password);
+        return DatabaseCustomerPostgres.getCustomerLogin(email, password);
     }
 }

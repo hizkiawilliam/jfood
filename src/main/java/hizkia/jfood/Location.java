@@ -8,6 +8,7 @@ package hizkia.jfood;
 
 public class Location
 {
+    private int id;
     private String province;
     private String description;
     private String city;
@@ -18,13 +19,23 @@ public class Location
      * @param province variable to store name province
      * @param description variable that stores information about description of location
      */
-    public Location(String city, String province, String description)
+    public Location(int id, String city, String province, String description)
     {
+        this.id = id;
         this.city = city;
         this.province = province;
         this.description = description;
     }
-    
+
+    /**
+     * Method as accessor to get id information
+     * @return provice variable
+     */
+    public int getId()
+    {
+        return id;
+    }
+
     /**
      * Method as accessor to get province information
      * @return provice variable
@@ -51,7 +62,16 @@ public class Location
     {
         return description;
     }
-    
+
+    /**
+     * Method as setter to set id
+     * @param id passing parameter that stores information of province
+     */
+    public void setProvince(int id)
+    {
+        this.id = id;
+    }
+
     /**
      * Method as setter to set province
      * @param province passing parameter that stores information of province

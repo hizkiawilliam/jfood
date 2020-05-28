@@ -8,6 +8,11 @@
 package hizkia.jfood.controller;
 
 import hizkia.jfood.*;
+import hizkia.jfood.database.DatabaseFood;
+import hizkia.jfood.database.DatabaseFoodPostgres;
+import hizkia.jfood.database.DatabaseSeller;
+import hizkia.jfood.exception.FoodNotFoundException;
+import hizkia.jfood.exception.SellerNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -25,7 +30,7 @@ public class FoodController {
     @RequestMapping("")
     public ArrayList<Food> getAllFood()
     {
-        return DatabaseFood.getFoodDatabase();
+        return DatabaseFoodPostgres.getFoodDatabase();
     }
 
     /**
@@ -35,7 +40,7 @@ public class FoodController {
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Food getFoodById(@PathVariable int id) throws FoodNotFoundException {
-        Food food = DatabaseFood.getFoodById(id);
+        Food food = DatabaseFoodPostgres.getFoodById(id);
         return food;
     }
 
@@ -46,7 +51,7 @@ public class FoodController {
      */
     @RequestMapping(value = "/seller/{sellerId}", method = RequestMethod.GET)
     public ArrayList<Food> getFoodBySeller(@PathVariable int sellerId) throws FoodNotFoundException {
-        ArrayList<Food> food = DatabaseFood.getFoodBySeller(sellerId);
+        ArrayList<Food> food = DatabaseFoodPostgres.getFoodBySeller(sellerId);
         return food;
     }
 
@@ -56,8 +61,8 @@ public class FoodController {
      * @return single food object
      */
     @RequestMapping(value = "/category/{category}", method = RequestMethod.GET)
-    public ArrayList<Food> getFoodByCategory(@PathVariable FoodCategory category) throws FoodNotFoundException {
-        ArrayList<Food> food = DatabaseFood.getFoodByCategory(category);
+    public ArrayList<Food> getFoodByCategory(@PathVariable String category) throws FoodNotFoundException {
+        ArrayList<Food> food = DatabaseFoodPostgres.getFoodByCategory(category);
         return food;
     }
 
@@ -72,13 +77,13 @@ public class FoodController {
     @RequestMapping(value = "", method = RequestMethod.POST)
     public Food addFood(@RequestParam(value="name") String name,
                                   @RequestParam(value="price") int price,
-                                  @RequestParam(value="category") FoodCategory category,
+                                  @RequestParam(value="category") String category,
                                   @RequestParam(value="sellerId") int sellerId)
     {
 
         try{
             Food food = new Food(DatabaseFood.getLastId()+1,name, DatabaseSeller.getSellerById(sellerId), price, category);
-            DatabaseFood.addFood(food);
+            DatabaseFoodPostgres.insertFood(food);
             return food;
         }
         catch (SellerNotFoundException e){

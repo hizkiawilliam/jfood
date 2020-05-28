@@ -7,13 +7,15 @@
 
 package hizkia.jfood;
 
+import hizkia.jfood.database.DatabasePaymentTypePostgres;
+
 import java.util.*;
 import java.text.*;
 
 public class CashlessInvoice extends Invoice
 {
     // instance variables - replace the example below with your own
-    private static final PaymentType PAYMENT_TYPE = PaymentType.Cashless;
+    private static final String PAYMENT_TYPE = DatabasePaymentTypePostgres.getPaymentType("Cashless");
     private Promo promo;
 
     /**
@@ -44,7 +46,7 @@ public class CashlessInvoice extends Invoice
      * Method as accessor or getter to get payment type of the invoice
      * @return PAYEMENT_TYPE variable that stores information about payment type of the invoice
      */
-    public PaymentType getPaymentType()
+    public String getPaymentType()
     {
         return PAYMENT_TYPE;
     }
@@ -77,7 +79,17 @@ public class CashlessInvoice extends Invoice
         {
             super.totalPrice += foods.getPrice();
         }
-        super.totalPrice -= promo.getDiscount();
+        if (promo != null){
+            super.totalPrice -= promo.getDiscount();
+        }
+    }
+
+    /**
+     * Method to set the total price of the invoice if fetched from postgres.
+     */
+    public void setTotalPricePostgres(int totalPrice)
+    {
+        super.totalPrice = totalPrice;
     }
 
     /**

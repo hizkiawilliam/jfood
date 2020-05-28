@@ -4,7 +4,10 @@
  * @author Hizkia William Eben
  * @version 17.04.2020
  */
-package hizkia.jfood;
+package hizkia.jfood.database;
+
+import hizkia.jfood.Food;
+import hizkia.jfood.exception.FoodNotFoundException;
 
 import java.util.ArrayList;
 
@@ -78,7 +81,7 @@ public class DatabaseFood
      * @param category variable that stores information of food category
      * @return categoryFoods array list of food grouped by category
      */
-    public static ArrayList<Food> getFoodByCategory(FoodCategory category)
+    public static ArrayList<Food> getFoodByCategory(String category)
     {
         ArrayList<Food> categoryFoods;
         categoryFoods = new ArrayList<>();

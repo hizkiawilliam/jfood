@@ -8,6 +8,9 @@
 package hizkia.jfood.controller;
 
 import hizkia.jfood.*;
+import hizkia.jfood.database.DatabasePromo;
+import hizkia.jfood.database.DatabasePromoPostgres;
+import hizkia.jfood.exception.PromoCodeAlreadyExistsException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -34,7 +37,7 @@ public class PromoController {
      */
     @RequestMapping(value = "/{code}", method = RequestMethod.GET)
     public Promo getPromoByCode(@PathVariable String code){
-        Promo promo = DatabasePromo.getPromoByCode(code);
+        Promo promo = DatabasePromoPostgres.getPromoByCode(code);
         return promo;
     }
 
@@ -52,14 +55,7 @@ public class PromoController {
                             @RequestParam(value="minPrice") int minPrice,
                             @RequestParam(value="active") boolean active)
     {
-        Promo promo = new Promo(DatabasePromo.getLastId()+1,code,discount,minPrice,active);
-        try{
-            DatabasePromo.addPromo(promo);
-            return promo;
-        }
-        catch(PromoCodeAlreadyExistsException e){
-            System.out.println(e.getMessage());
-        }
-        return null;
+        Promo promo = new Promo(DatabasePromoPostgres.getLastId()+1,code,discount,minPrice,active);
+        return DatabasePromoPostgres.insertPromo(promo);
     }
 }
