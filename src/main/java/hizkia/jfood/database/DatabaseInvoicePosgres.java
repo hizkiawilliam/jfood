@@ -1,8 +1,6 @@
 package hizkia.jfood.database;
 
 import hizkia.jfood.*;
-import hizkia.jfood.unused.InvoiceStatus;
-import hizkia.jfood.unused.PaymentType;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -192,9 +190,9 @@ public class DatabaseInvoicePosgres {
      * Method to change invoice status
      * @param id int variable for invoice id
      * @param invoiceStatus string variable for invoice status
-     * @return boolean, true if success
+     * @return invoice object if success
      */
-    public static boolean changeInvoiceStatus(int id, String invoiceStatus) {
+    public static Invoice changeInvoiceStatus(int id, String invoiceStatus) {
         Connection c = connection();
         PreparedStatement stmt;
         try {
@@ -205,10 +203,10 @@ public class DatabaseInvoicePosgres {
             stmt.close();
             c.commit();
             c.close();
-            return true;
+            return DatabaseInvoicePosgres.getInvoiceById(id);
         } catch (Exception e) {
             e.printStackTrace();
-            return false;
+            return null;
         }
     }
 
@@ -291,5 +289,4 @@ public class DatabaseInvoicePosgres {
         }
         return null;
     }
-
 }

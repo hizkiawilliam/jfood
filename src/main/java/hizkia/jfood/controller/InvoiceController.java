@@ -62,24 +62,9 @@ public class InvoiceController {
     public Invoice getInvoiceOngoingByCustomer(@PathVariable int customerId) throws InvoiceNotFoundException {
         ArrayList<Invoice>invoices = DatabaseInvoicePosgres.getInvoiceByCustomer(customerId);
         for(Invoice invoice:invoices){
-            if(invoice.getInvoiceStatus() == DatabaseInvoiceStatusPostgres.getInvoiceStatus("Ongoing")){
+            if(invoice.getInvoiceStatus().equals("Ongoing")){
                 return invoice;
             }
-        }
-        return null;
-    }
-
-    /**
-     * Method to change invoice status
-     * @param id variable to store id of invoice
-     * @param status variabel to store status invoice
-     * @return single invoice object if success, null if failed
-     */
-    @RequestMapping(value = "/invoiceStatus/{id}", method = RequestMethod.PUT)
-    public Invoice changeInvoiceStatus(@RequestParam(value="id") @PathVariable int id, @RequestParam(value="status") String status) throws InvoiceNotFoundException {
-        if (DatabaseInvoice.changeInvoiceStatus(id, status))
-        {
-            return DatabaseInvoice.getInvoiceById(id);
         }
         return null;
     }
@@ -164,13 +149,23 @@ public class InvoiceController {
         }return null;
     }
 
+    /**
+     * Method to change invoice status into canceled
+     * @param id_invoice variable to store id of invoice
+     * @return single invoice object if success, null if failed
+     */
     @RequestMapping(value = "/cancel", method = RequestMethod.POST)
-    public Boolean cancelTransaction(@RequestParam(value="id") int id_invoice) throws InvoiceNotFoundException {
+    public Invoice cancelTransaction(@RequestParam(value="id") int id_invoice) throws InvoiceNotFoundException {
         return DatabaseInvoicePosgres.changeInvoiceStatus(id_invoice, "Canceled");
     }
 
+    /**
+     * Method to change invoice status into finished
+     * @param id_invoice variable to store id of invoice
+     * @return single invoice object if success, null if failed
+     */
     @RequestMapping(value = "/finish", method = RequestMethod.POST)
-    public Boolean finishTransaction(@RequestParam(value="id") int id_invoice) throws InvoiceNotFoundException {
+    public Invoice finishTransaction(@RequestParam(value="id") int id_invoice) throws InvoiceNotFoundException {
         return DatabaseInvoicePosgres.changeInvoiceStatus(id_invoice, "Finished");
     }
 }
