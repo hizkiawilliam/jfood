@@ -24,7 +24,7 @@ import java.util.ArrayList;
 public class InvoiceController {
 
     /**
-     * Method to prints all invoice in the data base
+     * Method to prints all invoice in the database
      * @return all invoice in database
      */
     @RequestMapping("")
