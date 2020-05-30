@@ -6,6 +6,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import static hizkia.jfood.database.DatabaseConnection.connection;
 
@@ -97,6 +98,50 @@ public class DatabasePromoPostgres {
             else{
                 promo = new Promo(id, code, discount, minPrice, active);
                 return promo;
+            }
+        } catch ( Exception e ) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    /**
+     * Method for login customer using customer email and password
+     * @return object promo if success
+     */
+    public static ArrayList<Promo> getPromoDatabase()
+    {
+        Connection c = connection();
+        PreparedStatement stmt;
+        ArrayList<Promo> promos = new ArrayList<>();
+        Promo promo = null;
+        int id = 0;
+        String code = null;
+        int discount = 0;
+        int minPrice = 0;
+        boolean active = false;
+        try {
+            c.setAutoCommit(false);
+            String sql = "SELECT * FROM promo;";
+            stmt = c.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            while ( rs.next() ) {
+                id = rs.getInt("id");
+                code = rs.getString("code");
+                discount  = rs.getInt("discount");
+                minPrice = rs.getInt("minPrice");
+                active = rs.getBoolean("active");
+                promo = new Promo(id, code, discount, minPrice, active);
+                promos.add(promo);
+            }
+            rs.close();
+            stmt.close();
+            c.close();
+            if (id == 0){
+                return null;
+            }
+            else{
+                return promos;
             }
         } catch ( Exception e ) {
             e.printStackTrace();

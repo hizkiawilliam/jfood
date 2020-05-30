@@ -136,7 +136,6 @@ public class DatabaseInvoicePosgres {
      */
     public static ArrayList<Invoice> getInvoiceByCustomer(int customerId) {
         ArrayList<Invoice> invoiceDatabase = new ArrayList<>();
-        ArrayList<Food> finalFoodList = new ArrayList<>();
         CashInvoice cashValue;
         CashlessInvoice cashlessValue;
         Connection c = connection();
@@ -150,6 +149,7 @@ public class DatabaseInvoicePosgres {
                 int invoiceId = rs.getInt("id");
                 Array foodList = rs.getArray("food_list");
                 Integer[] strFoodList = (Integer[])foodList.getArray();
+                ArrayList<Food> finalFoodList = new ArrayList<>();
                 for (Integer integer : strFoodList) {
                     finalFoodList.add(DatabaseFoodPostgres.getFoodById(integer));
                 }
@@ -180,6 +180,61 @@ public class DatabaseInvoicePosgres {
             stmt.close();
             c.close();
             return invoiceDatabase;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * Method for fetching invoice by customer id with Ongoing status
+     * @param customerId int variable for customer id
+     * @return Array list of invoices if success
+     */
+    public static Invoice getInvoiceByCustomerOngoing(int customerId) {
+        ArrayList<Food> finalFoodList = new ArrayList<>();
+        CashInvoice cashValue;
+        CashlessInvoice cashlessValue;
+        Connection c = connection();
+        PreparedStatement stmt;
+        try {
+            c.setAutoCommit(false);
+            String sql = "SELECT * FROM invoice WHERE customer_id = " + customerId + " AND invoice_status = 'Ongoing';";
+            stmt = c.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()){
+                int invoiceId = rs.getInt("id");
+                Array foodList = rs.getArray("food_list");
+                Integer[] strFoodList = (Integer[])foodList.getArray();
+                for (Integer integer : strFoodList) {
+                    finalFoodList.add(DatabaseFoodPostgres.getFoodById(integer));
+                }
+                Customer customer = DatabaseCustomerPostgres.getCustomerById(rs.getInt("customer_id"));
+                Date invoiceDate = rs.getDate("invoice_date");
+                Calendar calendar = new GregorianCalendar();
+                calendar.setTime(invoiceDate);
+
+                int totalPrice = rs.getInt("total_price");
+                String invoiceStatus = rs.getString("invoice_status");
+                String paymentType = rs.getString("payment_type");
+
+                if (paymentType.equals("Cash")){
+                    int deliveryFee = rs.getInt("delivery_fee");
+                    cashValue = new CashInvoice(invoiceId, finalFoodList, customer, deliveryFee);
+                    cashValue.setInvoiceStatus(invoiceStatus);
+                    cashValue.setTotalPricePostgres(totalPrice);
+                    return cashValue;
+                }else if (paymentType.equals("Cashless")){
+                    String promoCode = rs.getString("promo_code");
+                    cashlessValue = new CashlessInvoice(invoiceId, finalFoodList, customer, DatabasePromoPostgres.getPromoByCode(promoCode));
+                    cashlessValue.setInvoiceStatus(invoiceStatus);
+                    cashlessValue.setTotalPrice();
+                    return cashlessValue;
+                }
+            }
+            rs.close();
+            stmt.close();
+            c.close();
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -240,7 +295,6 @@ public class DatabaseInvoicePosgres {
      */
     public static ArrayList<Invoice> getInvoiceDatabase() {
         ArrayList<Invoice> invoiceDatabase = new ArrayList<>();
-        ArrayList<Food> finalFoodList = new ArrayList<>();
         CashInvoice cashValue;
         CashlessInvoice cashlessValue;
         Connection c = connection();
@@ -254,6 +308,7 @@ public class DatabaseInvoicePosgres {
                 int invoiceId = rs.getInt("id");
                 Array foodList = rs.getArray("food_list");
                 Integer[] strFoodList = (Integer[])foodList.getArray();
+                ArrayList<Food> finalFoodList = new ArrayList<>();
                 for (Integer integer : strFoodList) {
                     finalFoodList.add(DatabaseFoodPostgres.getFoodById(integer));
                 }

@@ -60,13 +60,13 @@ public class InvoiceController {
      */
     @RequestMapping(value = "/customerOngoing/{customerId}", method = RequestMethod.GET)
     public Invoice getInvoiceOngoingByCustomer(@PathVariable int customerId) throws InvoiceNotFoundException {
-        ArrayList<Invoice>invoices = DatabaseInvoicePosgres.getInvoiceByCustomer(customerId);
-        for(Invoice invoice:invoices){
-            if(invoice.getInvoiceStatus().equals("Ongoing")){
-                return invoice;
-            }
-        }
-        return null;
+//        ArrayList<Invoice>invoices = DatabaseInvoicePosgres.getInvoiceByCustomer(customerId);
+//        for(Invoice invoice:invoices){
+//            if(invoice.getInvoiceStatus().equals("Ongoing")){
+//                return invoice;
+//            }
+//        }
+        return DatabaseInvoicePosgres.getInvoiceByCustomerOngoing(customerId);
     }
 
     /**
@@ -97,15 +97,17 @@ public class InvoiceController {
             menu.add(DatabaseFoodPostgres.getFoodById(foodId));
         }
         try{
-            for(Invoice invoiceCheck:DatabaseInvoicePosgres.getInvoiceByCustomer(customerId))
-            {
-                if (invoiceCheck.getInvoiceStatus().equals("Ongoing"))
-                {
-                    return null;
-                }
+//            for(Invoice invoiceCheck:DatabaseInvoicePosgres.getInvoiceByCustomer(customerId))
+//            {
+//                if (invoiceCheck.getInvoiceStatus().equals("Ongoing"))
+//                {
+//                    return null;
+//                }
+//            }
+            if(DatabaseInvoicePosgres.getInvoiceByCustomerOngoing(customerId)==null) {
+                Invoice invoice = new CashInvoice(DatabaseInvoice.getLastId() + 1, menu, DatabaseCustomerPostgres.getCustomerById(customerId), deliveryFee);
+                return DatabaseInvoicePosgres.insertCashInvoice(invoice, deliveryFee);
             }
-            Invoice invoice = new CashInvoice(DatabaseInvoice.getLastId() + 1, menu, DatabaseCustomerPostgres.getCustomerById(customerId), deliveryFee);
-            return DatabaseInvoicePosgres.insertCashInvoice(invoice, deliveryFee);
         }
         catch (Exception e){
             System.out.println(e.getMessage());
@@ -134,15 +136,18 @@ public class InvoiceController {
 
         Promo promo = DatabasePromoPostgres.getPromoByCode(promoCode);
         try{
-            for(Invoice invoiceCheck:DatabaseInvoicePosgres.getInvoiceByCustomer(customerId))
+//            for(Invoice invoiceCheck:DatabaseInvoicePosgres.getInvoiceByCustomer(customerId))
+//            {
+//                if (invoiceCheck.getInvoiceStatus().equals("Ongoing"))
+//                {
+//                    return null;
+//                }
+//            }
+            if(DatabaseInvoicePosgres.getInvoiceByCustomerOngoing(customerId)==null)
             {
-                if (invoiceCheck.getInvoiceStatus().equals("Ongoing"))
-                {
-                    return null;
-                }
+                Invoice invoice = new CashlessInvoice(DatabaseInvoice.getLastId() + 1, menu, DatabaseCustomerPostgres.getCustomerById(customerId), promo);
+                return DatabaseInvoicePosgres.insertCashlessInvoice(invoice,promoCode);
             }
-            Invoice invoice = new CashlessInvoice(DatabaseInvoice.getLastId() + 1, menu, DatabaseCustomerPostgres.getCustomerById(customerId), promo);
-            return DatabaseInvoicePosgres.insertCashlessInvoice(invoice,promoCode);
         }
         catch (Exception e){
             e.printStackTrace();
