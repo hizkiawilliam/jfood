@@ -27,7 +27,7 @@ public class PromoController {
     @RequestMapping("")
     public ArrayList<Promo> getAllPromo()
     {
-        return DatabasePromo.getPromoDatabase();
+        return DatabasePromoPostgres.getPromoDatabase();
     }
 
     /**
