@@ -8,7 +8,7 @@ package hizkia.jfood.unused;
 
 public enum PaymentType
 {
-    Cashless("Cashless"), 
+    Cashless("Cashless"),
     Cash("Cash");
     
     private String payment;
