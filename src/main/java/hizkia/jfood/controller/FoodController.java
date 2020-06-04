@@ -37,6 +37,7 @@ public class FoodController {
      * Method to get food from id
      * @param id variable to store id of food
      * @return single food object
+     * @throws FoodNotFoundException for checking if food not found
      */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Food getFoodById(@PathVariable int id) throws FoodNotFoundException {
@@ -48,6 +49,7 @@ public class FoodController {
      * Method to get food from sellerId
      * @param sellerId variable to store id of seller
      * @return single food object
+     * @throws FoodNotFoundException for checking if food not found
      */
     @RequestMapping(value = "/seller/{sellerId}", method = RequestMethod.GET)
     public ArrayList<Food> getFoodBySeller(@PathVariable int sellerId) throws FoodNotFoundException {
@@ -59,6 +61,7 @@ public class FoodController {
      * Method to get food from category
      * @param category variable to store category
      * @return single food object
+     * @throws FoodNotFoundException for checking if food not found
      */
     @RequestMapping(value = "/category/{category}", method = RequestMethod.GET)
     public ArrayList<Food> getFoodByCategory(@PathVariable String category) throws FoodNotFoundException {

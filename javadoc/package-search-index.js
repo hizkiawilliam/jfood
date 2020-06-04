@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"hizkia.jfood"},{"l":"hizkia.jfood.controller"},{"l":"hizkia.jfood.database"},{"l":"hizkia.jfood.exception"},{"l":"hizkia.jfood.unused"}]
